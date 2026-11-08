@@ -1,0 +1,809 @@
+/* =========================================================
+   TERRA Studio — Boutique (v3)
+   Responsivo + zonas seguras (safe areas) para celulares
+   Paleta: rosa suave, nude/pardo y acentos animal print
+   ========================================================= */
+
+/* ---------- Variables de diseño ---------- */
+:root {
+  --blush:      #FBEDEB;   /* fondo general */
+  --petal:      #F5D9D7;   /* rosa suave */
+  --rose:       #E7AAB1;   /* rosa medio */
+  --rose-deep:  #C9707E;   /* acento principal */
+  --nude:       #EAD5C6;   /* nude */
+  --latte:      #C9A68B;   /* pardo claro */
+  --mocha:      #8C6250;   /* pardo */
+  --cocoa:      #4A2F27;   /* texto principal */
+  --taupe:      #8F756B;   /* texto secundario */
+  --cream:      #FFF8F6;   /* tarjetas */
+
+  --leopard: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27 viewBox=%270 0 220 220%27%3E%3Cg transform=%27translate%2899.5 123.1%29 rotate%2876%29 scale%281.13 0.89%29%27%3E%3Cellipse rx=%2711.8%27 ry=%279.9%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-12.4 8.4A15.0 15.0 0 0 1 -14.1 -5.3%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-8.5 -12.5A15.1 15.1 0 0 1 6.4 -13.7%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.7 -8.6A15.4 15.4 0 0 1 13.1 8.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.1 13.4A16.2 16.2 0 0 1 -8.7 13.7%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-16.7 102.4%29 rotate%28137%29 scale%281.17 0.85%29%27%3E%3Cellipse rx=%278.4%27 ry=%277.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M0.7 -10.3A10.3 10.3 0 0 1 9.4 -4.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M10.6 0.7A10.6 10.6 0 0 1 4.5 9.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-0.8 11.1A11.1 11.1 0 0 1 -9.9 5.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-10.9 -0.8A11.0 11.0 0 0 1 -3.7 -10.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28203.3 102.4%29 rotate%28137%29 scale%281.17 0.85%29%27%3E%3Cellipse rx=%278.4%27 ry=%277.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M0.7 -10.3A10.3 10.3 0 0 1 9.4 -4.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M10.6 0.7A10.6 10.6 0 0 1 4.5 9.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-0.8 11.1A11.1 11.1 0 0 1 -9.9 5.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-10.9 -0.8A11.0 11.0 0 0 1 -3.7 -10.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2840.6 112.6%29 rotate%2810%29 scale%281.22 0.82%29%27%3E%3Cpath d=%27M8.8 0.0 L5.2 6.6 L-1.8 7.9 L-6.1 2.9 L-7.1 -3.4 L-1.8 -7.7 L4.9 -6.1Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28138.6 174.5%29 rotate%2867%29 scale%281.02 0.98%29%27%3E%3Cellipse rx=%278.9%27 ry=%277.5%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-9.1 -7.1A11.5 11.5 0 0 1 11.5 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%275.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.1 7.1A11.5 11.5 0 0 1 -11.1 -3.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2820.7 66.7%29 rotate%2871%29 scale%280.80 1.25%29%27%3E%3Cpath d=%27M4.2 0.0 L3.2 4.0 L-1.5 6.4 L-5.7 2.7 L-5.6 -2.7 L-1.0 -4.5 L3.4 -4.3Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28240.7 66.7%29 rotate%2871%29 scale%280.80 1.25%29%27%3E%3Cpath d=%27M4.2 0.0 L3.2 4.0 L-1.5 6.4 L-5.7 2.7 L-5.6 -2.7 L-1.0 -4.5 L3.4 -4.3Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%2819.9 178.1%29 rotate%28143%29 scale%281.12 0.89%29%27%3E%3Cellipse rx=%2710.7%27 ry=%279.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.9 -10.8A12.8 12.8 0 0 1 0.6 12.7%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.8 12.3A14.5 14.5 0 0 1 2.8 -14.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28239.9 178.1%29 rotate%28143%29 scale%281.12 0.89%29%27%3E%3Cellipse rx=%2710.7%27 ry=%279.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.9 -10.8A12.8 12.8 0 0 1 0.6 12.7%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.8 12.3A14.5 14.5 0 0 1 2.8 -14.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28152.6 9.2%29 rotate%2887%29 scale%281.16 0.86%29%27%3E%3Cellipse rx=%2711.5%27 ry=%279.7%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M9.3 12.1A15.3 15.3 0 0 1 -14.2 -5.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.0 -11.7A14.7 14.7 0 0 1 13.1 6.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28152.6 229.2%29 rotate%2887%29 scale%281.16 0.86%29%27%3E%3Cellipse rx=%2711.5%27 ry=%279.7%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M9.3 12.1A15.3 15.3 0 0 1 -14.2 -5.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.0 -11.7A14.7 14.7 0 0 1 13.1 6.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2834.6 3.3%29 rotate%28117%29 scale%280.83 1.21%29%27%3E%3Cpath d=%27M5.8 0.0 L3.3 4.1 L-1.0 4.2 L-5.1 2.5 L-3.9 -1.9 L-1.2 -5.3 L2.7 -3.4Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%2834.6 223.3%29 rotate%28117%29 scale%280.83 1.21%29%27%3E%3Cpath d=%27M5.8 0.0 L3.3 4.1 L-1.0 4.2 L-5.1 2.5 L-3.9 -1.9 L-1.2 -5.3 L2.7 -3.4Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28100.6 61.2%29 rotate%2823%29 scale%281.23 0.81%29%27%3E%3Cellipse rx=%278.9%27 ry=%277.5%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M7.3 8.5A11.2 11.2 0 0 1 -10.9 -2.6%27 stroke=%27%235A3A2E%27 stroke-width=%275.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.3 -8.5A11.2 11.2 0 0 1 9.6 5.7%27 stroke=%27%235A3A2E%27 stroke-width=%275.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28184.8 155.7%29 rotate%2825%29 scale%280.94 1.07%29%27%3E%3Cellipse rx=%2710.0%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-6.6 10.6A12.4 12.4 0 0 1 0.8 -12.4%27 stroke=%27%235A3A2E%27 stroke-width=%275.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -11.3A13.2 13.2 0 0 1 1.6 13.2%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28171.3 59.4%29 rotate%28104%29 scale%280.96 1.04%29%27%3E%3Cellipse rx=%2710.5%27 ry=%278.9%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.0 -12.1A13.5 13.5 0 0 1 13.4 -1.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.9 6.4A14.4 14.4 0 0 1 -0.3 14.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-6.3 12.7A14.2 14.2 0 0 1 -13.8 3.3%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.6 -5.8A13.0 13.0 0 0 1 -1.1 -12.9%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2898.1 13.3%29 rotate%28166%29 scale%281.03 0.97%29%27%3E%3Cellipse rx=%279.9%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M5.3 12.2A13.3 13.3 0 0 1 -12.3 5.2%27 stroke=%27%235A3A2E%27 stroke-width=%275.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.8 -1.3A11.9 11.9 0 0 1 3.4 -11.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -9.5A11.8 11.8 0 0 1 10.1 6.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2898.1 233.3%29 rotate%28166%29 scale%281.03 0.97%29%27%3E%3Cellipse rx=%279.9%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M5.3 12.2A13.3 13.3 0 0 1 -12.3 5.2%27 stroke=%27%235A3A2E%27 stroke-width=%275.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.8 -1.3A11.9 11.9 0 0 1 3.4 -11.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -9.5A11.8 11.8 0 0 1 10.1 6.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2891.8 173.9%29 rotate%28120%29 scale%281.08 0.93%29%27%3E%3Cpath d=%27M4.5 0.0 L3.6 4.5 L-1.2 5.2 L-6.4 3.1 L-6.0 -2.9 L-1.4 -6.3 L3.9 -4.9Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28153.6 109.4%29 rotate%28123%29 scale%281.09 0.92%29%27%3E%3Cellipse rx=%279.0%27 ry=%277.6%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-6.8 -9.6A11.8 11.8 0 0 1 9.3 -7.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.1 -1.1A12.2 12.2 0 0 1 -0.6 12.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-4.5 9.9A10.9 10.9 0 0 1 -10.2 -3.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-20.6 19.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-20.6 239.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28199.4 19.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28199.4 239.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2858.7 41.0%29 rotate%28132%29 scale%280.76 1.32%29%27%3E%3Cpath d=%27M9.4 0.0 L3.5 4.4 L-2.0 8.8 L-7.4 3.6 L-8.0 -3.9 L-2.1 -9.2 L4.0 -5.1Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Ccircle cx=%2740.2%27 cy=%2713.6%27 r=%272.9%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27144.9%27 cy=%2757.8%27 r=%273.3%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2793.9%27 cy=%27100.8%27 r=%273.3%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27141.3%27 cy=%27102.8%27 r=%273.0%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27160.5%27 cy=%2769.7%27 r=%272.1%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27158.7%27 cy=%27162.1%27 r=%272.8%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2729.6%27 cy=%27161.3%27 r=%272.2%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27172.5%27 cy=%27135.6%27 r=%272.9%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2720.8%27 cy=%2781.6%27 r=%273.0%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2728.4%27 cy=%2713.1%27 r=%272.6%27 fill=%27%235A3A2E%27/%3E%3C/svg%3E");
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body:    "Outfit", system-ui, sans-serif;
+  --font-script:  "Parisienne", cursive;
+
+  --radius:   24px;
+  --radius-s: 999px;
+  --shadow:   0 2px 4px rgba(140, 98, 80, .05), 0 16px 36px -18px rgba(140, 98, 80, .35);
+  --shadow-h: 0 4px 8px rgba(201, 112, 126, .08), 0 28px 50px -20px rgba(201, 112, 126, .45);
+  --ease:     cubic-bezier(.22, .61, .36, 1);
+  --bounce:   cubic-bezier(.34, 1.56, .64, 1);
+
+  /* Zonas seguras: espacio que ocupan el notch, la barra de gestos
+     o los botones de navegación del teléfono (0 en PC) */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --gutter:      clamp(1rem, 4vw, 1.5rem);
+}
+
+/* ---------- Reset básico ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(5.5rem + var(--safe-top));  /* que la barra fija no tape los títulos */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-body);
+  background: var(--blush);
+  color: var(--cocoa);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body.no-scroll { overflow: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+.container {
+  width: 100%;
+  max-width: calc(1180px + 2 * var(--gutter));
+  margin-inline: auto;
+  /* respeta los bordes laterales en celulares en horizontal */
+  padding-left:  max(var(--gutter), var(--safe-left));
+  padding-right: max(var(--gutter), var(--safe-right));
+}
+
+/* ---------- Franja animal print ---------- */
+.leo-strip {
+  height: 10px;
+  background: var(--leopard) 0 50% / 120px, var(--nude);
+}
+.leo-strip--thin { height: 8px; background-size: 100px; opacity: .9; }
+
+/* ---------- Logo ---------- */
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: -.01em;
+  color: var(--cocoa);
+  line-height: 1;
+}
+.logo span {
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  color: var(--rose-deep);
+}
+.logo--light { color: var(--cream); }
+.logo--light span { color: var(--rose); }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  font-weight: 600;
+  font-size: .95rem;
+  padding: .95rem 1.7rem;
+  border-radius: var(--radius-s);
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--bounce),
+              box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.btn:active { transform: scale(.97); }
+
+.btn--primary {
+  background: var(--rose-deep);
+  color: var(--cream);
+  box-shadow: 0 10px 24px -10px rgba(201, 112, 126, .8);
+}
+.btn--primary:hover { background: var(--mocha); transform: translateY(-3px); box-shadow: 0 16px 28px -12px rgba(140, 98, 80, .7); }
+
+.btn--ghost {
+  border: 1.5px solid var(--mocha);
+  color: var(--mocha);
+}
+.btn--ghost:hover { background: var(--mocha); color: var(--cream); transform: translateY(-3px); }
+
+.btn--soft {
+  width: 100%;
+  background: var(--petal);
+  color: var(--cocoa);
+  padding: .8rem 1.2rem;
+  font-size: .88rem;
+}
+.card:hover .btn--soft,
+.card:focus-visible .btn--soft { background: var(--rose-deep); color: var(--cream); }
+.card:focus-visible { outline: none; }
+
+.btn--whatsapp {
+  width: 100%;
+  background: linear-gradient(135deg, var(--rose-deep), var(--mocha));
+  background-size: 200% 100%;
+  background-position: 0 0;
+  color: var(--cream);
+  box-shadow: 0 12px 26px -12px rgba(201, 112, 126, .85);
+  transition: background-position .5s var(--ease), transform .3s var(--bounce), box-shadow .3s var(--ease), opacity .3s;
+}
+.btn--whatsapp::before {
+  content: "";
+  width: 18px; height: 18px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6 0l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6 0l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.btn--whatsapp:hover { background-position: 100% 0; transform: translateY(-3px); }
+.btn--whatsapp.is-disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* =========================================================
+   CABECERA
+   ========================================================= */
+/* Barra superior fija */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding-top: var(--safe-top);
+  background: rgba(251, 237, 235, .82);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid rgba(231, 170, 177, .35);
+}
+
+.intro {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(231, 170, 177, .45), transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(201, 166, 139, .35), transparent 45%),
+    var(--blush);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* logo a la izquierda, menú a la derecha */
+  gap: 1rem;
+  padding-block: .9rem;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  margin-left: auto;
+}
+.nav__links a {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--mocha);
+  padding: .5rem 1rem;
+  border-radius: var(--radius-s);
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+.nav__links a:hover { background: var(--petal); color: var(--cocoa); }
+.nav__links a.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-left: .35rem;
+  background: var(--rose-deep);
+  color: var(--cream);
+  font-weight: 600;
+  transition: background .3s var(--ease), transform .3s var(--bounce);
+}
+.nav__links a.nav__cta:hover { background: var(--mocha); color: var(--cream); transform: translateY(-2px); }
+.nav__cta svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3.5rem, 9vw, 6.5rem) clamp(3.5rem, 8vw, 5.5rem);
+  max-width: 820px;
+  text-align: center;
+  animation: fadeUp .9s var(--ease) both;
+}
+.hero__eyebrow {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  background: var(--cream);
+  padding: .45rem 1.1rem;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--petal);
+  margin-bottom: 1.6rem;
+}
+.hero__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+  margin-bottom: 1.5rem;
+}
+.hero__title em {
+  font-style: italic;
+  color: var(--rose-deep);
+  position: relative;
+}
+.hero__title em::after {
+  /* subrayado con animal print */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: .02em;
+  height: .16em;
+  border-radius: 99px;
+  background: var(--leopard) 0 0 / 60px, var(--nude);
+  z-index: -1;
+}
+.hero__script {
+  position: absolute;
+  right: -.2em; top: -.5em;
+  font-family: var(--font-script);
+  font-size: .45em;
+  color: var(--mocha);
+  transform: rotate(-12deg);
+}
+.hero__subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-weight: 300;
+  color: var(--taupe);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.hero__subtitle strong { color: var(--cocoa); font-weight: 600; }
+
+/* Formas decorativas */
+.blob {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.blob--1 {
+  width: 150px; height: 150px;
+  left: -40px; top: 40px;
+  background: var(--leopard) 0 0 / 110px, var(--nude);
+  opacity: .5;
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  animation: float 9s ease-in-out infinite;
+}
+.blob--2 {
+  width: 110px; height: 110px;
+  right: -10px; bottom: 50px;
+  background: var(--rose);
+  opacity: .45;
+  border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%;
+  animation: float 11s ease-in-out infinite reverse;
+}
+
+/* Cinta animada */
+.marquee {
+  overflow: hidden;
+  background: var(--rose-deep);
+  color: var(--cream);
+  padding-block: .85rem;
+}
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  width: max-content;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+.marquee__track i { font-style: normal; color: var(--petal); }
+
+/* =========================================================
+   SECCIONES GENERALES
+   ========================================================= */
+.section-head { text-align: center; margin: 0 auto 3rem; max-width: 560px; }
+.section-kicker {
+  font-family: var(--font-script);
+  font-size: 1.7rem;
+  color: var(--rose-deep);
+  line-height: 1;
+  margin-bottom: .2rem;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  letter-spacing: -.01em;
+  line-height: 1.05;
+  margin-bottom: .8rem;
+}
+.section-text { color: var(--taupe); font-weight: 300; }
+
+/* =========================================================
+   CATÁLOGO
+   ========================================================= */
+.catalog { padding-block: clamp(4rem, 8vw, 6rem); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.8rem);
+  align-items: stretch;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: .7rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow);
+  transition: transform .45s var(--bounce), box-shadow .45s var(--ease), border-color .35s var(--ease);
+  animation: fadeUp .8s var(--ease) both;
+}
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-8px);
+  border-color: var(--rose);
+  box-shadow: var(--shadow-h);
+}
+
+.card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;           /* tarjeta cuadrada */
+  border-radius: calc(var(--radius) - 8px);
+  overflow: hidden;
+  background: var(--nude);
+}
+.card__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .9s var(--ease);
+}
+.card:hover .card__media img { transform: scale(1.07); }
+
+.card__tag {
+  position: absolute;
+  top: .8rem; left: .8rem;
+  z-index: 2;
+  color: var(--cream);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .4rem .85rem;
+  border-radius: var(--radius-s);
+  background: var(--rose-deep);
+}
+/* Etiqueta con animal print */
+.card__tag::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: var(--leopard) 0 0 / 70px;
+  opacity: .22;
+  pointer-events: none;
+}
+
+/* Botón "Ver detalles" que aparece al pasar el cursor */
+.card__peek {
+  position: absolute;
+  left: 50%; bottom: .9rem;
+  transform: translate(-50%, 14px);
+  opacity: 0;
+  background: var(--cream);
+  color: var(--cocoa);
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  transition: opacity .35s var(--ease), transform .35s var(--bounce);
+}
+.card:hover .card__peek { opacity: 1; transform: translate(-50%, 0); }
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding: 1rem .5rem .4rem;
+  flex: 1;
+}
+.card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .8rem;
+}
+.card__name {
+  overflow-wrap: anywhere;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.card__price {
+  font-weight: 600;
+  font-size: .95rem;
+  white-space: nowrap;
+  color: var(--rose-deep);
+}
+
+.sizes-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: auto;
+}
+.sizes-mini li {
+  font-size: .75rem;
+  font-weight: 500;
+  padding: .2rem .65rem;
+  border-radius: var(--radius-s);
+  background: var(--blush);
+  color: var(--mocha);
+}
+.sizes-mini li.is-out { text-decoration: line-through; opacity: .45; }
+
+/* =========================================================
+   VENTANA DE DETALLES (MODAL)
+   ========================================================= */
+.modal {
+  position: fixed;
+  margin: auto;
+  border: 0;
+  padding: 0;
+  width: min(940px, 100% - 2rem);
+  max-height: calc(100dvh - 2rem - var(--safe-top) - var(--safe-bottom));
+  border-radius: 28px;
+  background: var(--cream);
+  color: var(--cocoa);
+  box-shadow: 0 40px 80px -30px rgba(74, 47, 39, .55);
+  overflow: hidden;
+}
+.modal[open] { animation: popIn .4s var(--bounce) both; }
+.modal.is-closing { animation: popOut .22s var(--ease) both; }
+.modal::backdrop {
+  background: rgba(74, 47, 39, .35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fade .3s var(--ease) both;
+}
+.modal.is-closing::backdrop { animation: fade .22s var(--ease) reverse both; }
+
+.modal__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  max-height: calc(100dvh - 2rem - var(--safe-top) - var(--safe-bottom));
+}
+.modal__media {
+  position: relative;
+  background: var(--nude);
+}
+.modal__media img { width: 100%; height: 100%; object-fit: cover; }
+
+.modal__info {
+  overflow-y: auto;
+  padding: 2.4rem 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.modal__close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  z-index: 3;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--blush);
+  color: var(--cocoa);
+  font-size: .95rem;
+  transition: background .3s var(--ease), transform .4s var(--bounce);
+}
+.modal__close:hover { background: var(--rose); transform: rotate(90deg); }
+
+.modal__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  padding-right: 2.5rem;
+}
+.modal__price { font-size: 1.2rem; font-weight: 600; color: var(--rose-deep); margin-top: -.6rem; }
+.modal__desc { color: var(--taupe); font-weight: 300; }
+.modal__details { display: grid; gap: .3rem; font-size: .9rem; }
+.modal__details li::before { content: "♡"; color: var(--rose-deep); margin-right: .55rem; }
+
+.modal__block { display: grid; gap: .6rem; }
+.modal__label { font-weight: 600; font-size: .9rem; }
+.modal__label span { font-weight: 400; color: var(--taupe); }
+
+/* Selector de tallas */
+.size-picker { display: flex; flex-wrap: wrap; gap: .5rem; }
+.size {
+  min-width: 3.2rem;
+  padding: .65rem 1rem;
+  border-radius: 14px;
+  border: 1.5px solid var(--petal);
+  background: var(--cream);
+  font-weight: 600;
+  font-size: .9rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
+  transition: border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease), transform .3s var(--bounce);
+}
+.size:hover:not(:disabled) { border-color: var(--rose-deep); transform: translateY(-2px); }
+.size[aria-checked="true"] {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: var(--cream);
+  transform: scale(1.06);
+}
+.size:disabled { opacity: .45; cursor: not-allowed; text-decoration: line-through; }
+.size small { font-size: .62rem; font-weight: 500; text-decoration: none; }
+
+/* Tabla de medidas */
+.table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--petal); }
+.measures { width: 100%; border-collapse: collapse; font-size: .88rem; text-align: center; }
+.measures th {
+  background: var(--blush);
+  font-weight: 600;
+  color: var(--mocha);
+  padding: .6rem .5rem;
+}
+.measures td { padding: .55rem .5rem; border-top: 1px solid var(--petal); transition: background .3s var(--ease), color .3s; }
+.measures td:first-child { font-weight: 600; }
+.measures tr.is-active td { background: var(--petal); color: var(--cocoa); font-weight: 600; }
+
+.modal__note { font-size: .78rem; color: var(--taupe); text-align: center; margin-top: -.3rem; }
+
+/* =========================================================
+   CÓMO COMPRAR
+   ========================================================= */
+.info {
+  position: relative;
+  background: var(--petal);
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.step {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 2.2rem 1.9rem;
+  border: 2px solid transparent;
+  transition: transform .45s var(--bounce), border-color .3s var(--ease), box-shadow .4s var(--ease);
+}
+.step:hover { transform: translateY(-6px); border-color: var(--rose); box-shadow: var(--shadow-h); }
+
+.step__num {
+  position: absolute;
+  top: 1.4rem; right: 1.7rem;
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--petal);
+}
+.step__icon {
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  border-radius: 18px;
+  background: var(--blush);
+  margin-bottom: 1.4rem;
+}
+.step__icon svg {
+  width: 26px; height: 26px;
+  fill: none;
+  stroke: var(--rose-deep);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.step__title { font-family: var(--font-display); font-weight: 400; font-size: 1.45rem; margin-bottom: .6rem; }
+.step__text { font-size: .95rem; color: var(--taupe); font-weight: 300; }
+.step__text strong { color: var(--cocoa); font-weight: 600; }
+
+/* Tarjeta destacada con animal print (pago) */
+.step--leo {
+  background: var(--leopard) 0 0 / 160px, var(--nude);
+}
+.step--leo::before {
+  content: "";
+  position: absolute; inset: 10px;
+  border-radius: calc(var(--radius) - 8px);
+  background: var(--cream);
+  opacity: .92;
+}
+.step--leo > * { position: relative; }
+.step--leo .step__num { position: absolute; color: var(--rose); }
+
+.pill {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: .4rem .9rem;
+  border-radius: var(--radius-s);
+  background: var(--rose-deep);
+  color: var(--cream);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   PIE DE PÁGINA
+   ========================================================= */
+.footer {
+  background: var(--cocoa);
+  color: rgba(255, 248, 246, .7);
+  font-size: .85rem;
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 2.5rem;
+  padding-bottom: calc(2.5rem + var(--safe-bottom));  /* no queda bajo la barra del teléfono */
+}
+.footer__link { color: var(--rose); font-weight: 600; margin-right: 4.5rem; transition: color .25s; }
+.footer__link:hover { color: var(--cream); }
+
+/* Botón flotante WhatsApp */
+.fab {
+  position: fixed;
+  /* separado de la barra de gestos / botones del teléfono */
+  right:  calc(1.25rem + var(--safe-right));
+  bottom: calc(1.25rem + var(--safe-bottom));
+  width: 60px; height: 60px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9);
+  transition: transform .4s var(--bounce), background .3s;
+  z-index: 50;
+  animation: pulse 2.8s ease-in-out infinite;
+}
+.fab svg { width: 28px; height: 28px; fill: var(--cream); }
+.fab:hover { transform: scale(1.1) rotate(-6deg); background: var(--mocha); }
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes scroll { to { transform: translateX(-50%); } }
+@keyframes float  { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-14px) rotate(8deg); } }
+@keyframes fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn  { from { opacity: 0; transform: translateY(30px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes popOut { to { opacity: 0; transform: translateY(20px) scale(.97); } }
+@keyframes pulse  {
+  0%, 100% { box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9), 0 0 0 0 rgba(231, 170, 177, .6); }
+  50%      { box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9), 0 0 0 12px rgba(231, 170, 177, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 960px) {
+  .grid  { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  /* La ventana de detalles se vuelve una hoja que sube desde abajo */
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+    border-radius: 28px 28px 0 0;
+    max-height: calc(92dvh - var(--safe-top));
+  }
+  .modal[open]        { animation: sheetIn .45s var(--ease) both; }
+  .modal.is-closing   { animation: sheetOut .22s var(--ease) both; }
+  .modal__inner       { grid-template-columns: 1fr; grid-auto-rows: max-content; max-height: calc(92dvh - var(--safe-top)); overflow-y: auto; overscroll-behavior: contain; }
+  .modal__media       { aspect-ratio: 4 / 3; }
+  .modal__info {
+    overflow: visible;
+    padding: 1.6rem max(1.4rem, var(--safe-right)) calc(1.8rem + var(--safe-bottom)) max(1.4rem, var(--safe-left));
+  }
+  .modal__close       { background: var(--cream); box-shadow: 0 4px 14px -4px rgba(74, 47, 39, .35); }
+}
+@keyframes sheetIn  { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes sheetOut { to { transform: translateY(100%); } }
+
+@media (max-width: 600px) {
+  .nav__links a { font-size: .82rem; padding: .45rem .65rem; }
+  /* en celular el botón de contacto queda solo con el ícono */
+  .nav__links a.nav__cta { width: 38px; height: 38px; padding: 0; justify-content: center; border-radius: 50%; }
+  .nav__cta span { display: none; }
+  .logo { font-size: 1.4rem; }
+  .logo span { font-size: 1.25rem; }
+  .hero__script { right: 0; top: -.9em; }
+  .grid { gap: .8rem; }
+  .card { padding: .5rem; border-radius: 20px; }
+  .card__body { padding: .8rem .3rem .3rem; gap: .6rem; }
+  .card__row { flex-direction: column; gap: .15rem; }
+  .card__name { font-size: 1rem; }
+  .card__price { font-size: .85rem; }
+  .card__peek { display: none; }
+  .btn--soft { padding: .7rem .6rem; font-size: .78rem; }
+  .footer__inner { flex-direction: column; text-align: center; }
+  .footer__link { margin-right: 0; }
+  /* deja espacio para el botón flotante + barra del teléfono */
+  .footer__inner { padding-bottom: calc(6rem + var(--safe-bottom)); }
+  .fab { width: 54px; height: 54px; }
+}
+
+@media (max-width: 380px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 340px) {
+  .nav__links li:nth-child(2) { display: none; }  /* pantallas muy angostas */
+}
+
+/* Pantallas grandes */
+@media (min-width: 1500px) {
+  :root { --gutter: 2rem; }
+  .container { max-width: calc(1340px + 2 * var(--gutter)); }
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Celular en horizontal (poca altura) */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero { padding-block: 2.5rem 2.5rem; }
+  .modal__info { padding: 1.4rem 1.6rem; }
+}
+
+/* En pantallas táctiles no hay "hover": evitamos efectos pegados al tocar */
+@media (hover: none) {
+  .card:hover { transform: none; border-color: transparent; box-shadow: var(--shadow); }
+  .card:hover .card__media img { transform: none; }
+  .card:hover .btn--soft { background: var(--petal); color: var(--cocoa); }
+  .card:hover .card__peek { opacity: 0; }
+  .card:active { transform: scale(.98); border-color: var(--rose); }
+  .step:hover { transform: none; border-color: transparent; box-shadow: none; }
+}
