@@ -177,8 +177,8 @@
 
   <!-- ============ DATOS Y COMPORTAMIENTO ============ -->
   <script>
-    // ✏️ Cambia aquí tu número de WhatsApp (formato: 521 + 10 dígitos, sin espacios)
-    const WHATSAPP = "5215512345678";
+    // ✏️ Tu número de WhatsApp (formato: 52 + 10 dígitos, sin espacios ni signos). Cambiarlo aquí actualiza todos los botones.
+    const WHATSAPP = "525531045512";
 
     // ✏️ Edita, agrega o quita productos aquí
     const PRODUCTS = [
@@ -255,6 +255,11 @@
         measures: { S: [52, 62, 58], M: [55, 64, 59], L: [58, 66, 60] }
       }
     ];
+
+    // ---------- Todos los enlaces de WhatsApp usan el número de arriba ----------
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
+      a.href = a.href.replace(/wa\.me\/\d+/, "wa.me/" + WHATSAPP);
+    });
 
     // ---------- Utilidades ----------
     const money = n => "$" + n.toLocaleString("es-MX") + " MXN";
