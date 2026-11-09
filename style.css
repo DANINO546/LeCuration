@@ -1,32 +1,33 @@
 /* =========================================================
-   TERRA Studio — Boutique (v3)
+   LeCuration MX — Boutique (v4)
    Responsivo + zonas seguras (safe areas) para celulares
-   Paleta: rosa suave, nude/pardo y acentos animal print
+   Paleta: cafés cálidos, cremas y acentos animal print
    ========================================================= */
 
 /* ---------- Variables de diseño ---------- */
 :root {
-  --blush:      #FBEDEB;   /* fondo general */
-  --petal:      #F5D9D7;   /* rosa suave */
-  --rose:       #E7AAB1;   /* rosa medio */
-  --rose-deep:  #C9707E;   /* acento principal */
-  --nude:       #EAD5C6;   /* nude */
-  --latte:      #C9A68B;   /* pardo claro */
-  --mocha:      #8C6250;   /* pardo */
-  --cocoa:      #4A2F27;   /* texto principal */
-  --taupe:      #8F756B;   /* texto secundario */
-  --cream:      #FFF8F6;   /* tarjetas */
+  --blush:      #F7EFE5;   /* fondo general */
+  --petal:      #EBDCC9;   /* crema arena */
+  --rose:       #D4B79B;   /* caramelo suave */
+  --rose-deep:  #9B6A47;   /* acento principal */
+  --nude:       #E6D5C1;   /* nude */
+  --latte:      #C4A484;   /* pardo claro */
+  --mocha:      #7A5640;   /* pardo */
+  --cocoa:      #3F2C23;   /* texto principal */
+  --taupe:      #7F695A;   /* texto secundario */
+  --cream:      #FFFAF3;   /* tarjetas */
 
   --leopard: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27220%27 height=%27220%27 viewBox=%270 0 220 220%27%3E%3Cg transform=%27translate%2899.5 123.1%29 rotate%2876%29 scale%281.13 0.89%29%27%3E%3Cellipse rx=%2711.8%27 ry=%279.9%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-12.4 8.4A15.0 15.0 0 0 1 -14.1 -5.3%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-8.5 -12.5A15.1 15.1 0 0 1 6.4 -13.7%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.7 -8.6A15.4 15.4 0 0 1 13.1 8.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.1 13.4A16.2 16.2 0 0 1 -8.7 13.7%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-16.7 102.4%29 rotate%28137%29 scale%281.17 0.85%29%27%3E%3Cellipse rx=%278.4%27 ry=%277.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M0.7 -10.3A10.3 10.3 0 0 1 9.4 -4.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M10.6 0.7A10.6 10.6 0 0 1 4.5 9.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-0.8 11.1A11.1 11.1 0 0 1 -9.9 5.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-10.9 -0.8A11.0 11.0 0 0 1 -3.7 -10.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28203.3 102.4%29 rotate%28137%29 scale%281.17 0.85%29%27%3E%3Cellipse rx=%278.4%27 ry=%277.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M0.7 -10.3A10.3 10.3 0 0 1 9.4 -4.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M10.6 0.7A10.6 10.6 0 0 1 4.5 9.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-0.8 11.1A11.1 11.1 0 0 1 -9.9 5.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.3%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-10.9 -0.8A11.0 11.0 0 0 1 -3.7 -10.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2840.6 112.6%29 rotate%2810%29 scale%281.22 0.82%29%27%3E%3Cpath d=%27M8.8 0.0 L5.2 6.6 L-1.8 7.9 L-6.1 2.9 L-7.1 -3.4 L-1.8 -7.7 L4.9 -6.1Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28138.6 174.5%29 rotate%2867%29 scale%281.02 0.98%29%27%3E%3Cellipse rx=%278.9%27 ry=%277.5%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-9.1 -7.1A11.5 11.5 0 0 1 11.5 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%275.4%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.1 7.1A11.5 11.5 0 0 1 -11.1 -3.1%27 stroke=%27%235A3A2E%27 stroke-width=%276.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2820.7 66.7%29 rotate%2871%29 scale%280.80 1.25%29%27%3E%3Cpath d=%27M4.2 0.0 L3.2 4.0 L-1.5 6.4 L-5.7 2.7 L-5.6 -2.7 L-1.0 -4.5 L3.4 -4.3Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28240.7 66.7%29 rotate%2871%29 scale%280.80 1.25%29%27%3E%3Cpath d=%27M4.2 0.0 L3.2 4.0 L-1.5 6.4 L-5.7 2.7 L-5.6 -2.7 L-1.0 -4.5 L3.4 -4.3Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%2819.9 178.1%29 rotate%28143%29 scale%281.12 0.89%29%27%3E%3Cellipse rx=%2710.7%27 ry=%279.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.9 -10.8A12.8 12.8 0 0 1 0.6 12.7%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.8 12.3A14.5 14.5 0 0 1 2.8 -14.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28239.9 178.1%29 rotate%28143%29 scale%281.12 0.89%29%27%3E%3Cellipse rx=%2710.7%27 ry=%279.1%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.9 -10.8A12.8 12.8 0 0 1 0.6 12.7%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.8 12.3A14.5 14.5 0 0 1 2.8 -14.3%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28152.6 9.2%29 rotate%2887%29 scale%281.16 0.86%29%27%3E%3Cellipse rx=%2711.5%27 ry=%279.7%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M9.3 12.1A15.3 15.3 0 0 1 -14.2 -5.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.0 -11.7A14.7 14.7 0 0 1 13.1 6.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28152.6 229.2%29 rotate%2887%29 scale%281.16 0.86%29%27%3E%3Cellipse rx=%2711.5%27 ry=%279.7%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M9.3 12.1A15.3 15.3 0 0 1 -14.2 -5.6%27 stroke=%27%235A3A2E%27 stroke-width=%276.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.0 -11.7A14.7 14.7 0 0 1 13.1 6.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2834.6 3.3%29 rotate%28117%29 scale%280.83 1.21%29%27%3E%3Cpath d=%27M5.8 0.0 L3.3 4.1 L-1.0 4.2 L-5.1 2.5 L-3.9 -1.9 L-1.2 -5.3 L2.7 -3.4Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%2834.6 223.3%29 rotate%28117%29 scale%280.83 1.21%29%27%3E%3Cpath d=%27M5.8 0.0 L3.3 4.1 L-1.0 4.2 L-5.1 2.5 L-3.9 -1.9 L-1.2 -5.3 L2.7 -3.4Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28100.6 61.2%29 rotate%2823%29 scale%281.23 0.81%29%27%3E%3Cellipse rx=%278.9%27 ry=%277.5%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M7.3 8.5A11.2 11.2 0 0 1 -10.9 -2.6%27 stroke=%27%235A3A2E%27 stroke-width=%275.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-7.3 -8.5A11.2 11.2 0 0 1 9.6 5.7%27 stroke=%27%235A3A2E%27 stroke-width=%275.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28184.8 155.7%29 rotate%2825%29 scale%280.94 1.07%29%27%3E%3Cellipse rx=%2710.0%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-6.6 10.6A12.4 12.4 0 0 1 0.8 -12.4%27 stroke=%27%235A3A2E%27 stroke-width=%275.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -11.3A13.2 13.2 0 0 1 1.6 13.2%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28171.3 59.4%29 rotate%28104%29 scale%280.96 1.04%29%27%3E%3Cellipse rx=%2710.5%27 ry=%278.9%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M6.0 -12.1A13.5 13.5 0 0 1 13.4 -1.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.5%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.9 6.4A14.4 14.4 0 0 1 -0.3 14.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.7%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-6.3 12.7A14.2 14.2 0 0 1 -13.8 3.3%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.6 -5.8A13.0 13.0 0 0 1 -1.1 -12.9%27 stroke=%27%235A3A2E%27 stroke-width=%275.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2898.1 13.3%29 rotate%28166%29 scale%281.03 0.97%29%27%3E%3Cellipse rx=%279.9%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M5.3 12.2A13.3 13.3 0 0 1 -12.3 5.2%27 stroke=%27%235A3A2E%27 stroke-width=%275.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.8 -1.3A11.9 11.9 0 0 1 3.4 -11.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -9.5A11.8 11.8 0 0 1 10.1 6.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2898.1 233.3%29 rotate%28166%29 scale%281.03 0.97%29%27%3E%3Cellipse rx=%279.9%27 ry=%278.4%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M5.3 12.2A13.3 13.3 0 0 1 -12.3 5.2%27 stroke=%27%235A3A2E%27 stroke-width=%275.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-11.8 -1.3A11.9 11.9 0 0 1 3.4 -11.4%27 stroke=%27%235A3A2E%27 stroke-width=%274.9%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M7.0 -9.5A11.8 11.8 0 0 1 10.1 6.0%27 stroke=%27%235A3A2E%27 stroke-width=%276.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2891.8 173.9%29 rotate%28120%29 scale%281.08 0.93%29%27%3E%3Cpath d=%27M4.5 0.0 L3.6 4.5 L-1.2 5.2 L-6.4 3.1 L-6.0 -2.9 L-1.4 -6.3 L3.9 -4.9Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Cg transform=%27translate%28153.6 109.4%29 rotate%28123%29 scale%281.09 0.92%29%27%3E%3Cellipse rx=%279.0%27 ry=%277.6%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-6.8 -9.6A11.8 11.8 0 0 1 9.3 -7.3%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M12.1 -1.1A12.2 12.2 0 0 1 -0.6 12.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-4.5 9.9A10.9 10.9 0 0 1 -10.2 -3.8%27 stroke=%27%235A3A2E%27 stroke-width=%274.1%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-20.6 19.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28-20.6 239.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28199.4 19.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%28199.4 239.2%29 rotate%28117%29 scale%281.10 0.91%29%27%3E%3Cellipse rx=%278.3%27 ry=%277.0%27 fill=%27%23C08F6C%27/%3E%3Cpath d=%27M-1.0 -10.5A10.6 10.6 0 0 1 10.6 0.0%27 stroke=%27%235A3A2E%27 stroke-width=%274.2%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M9.5 4.4A10.5 10.5 0 0 1 -4.6 9.4%27 stroke=%27%235A3A2E%27 stroke-width=%276.6%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3Cpath d=%27M-9.2 6.5A11.3 11.3 0 0 1 -7.7 -8.2%27 stroke=%27%235A3A2E%27 stroke-width=%274.8%27 stroke-linecap=%27round%27 fill=%27none%27/%3E%3C/g%3E%3Cg transform=%27translate%2858.7 41.0%29 rotate%28132%29 scale%280.76 1.32%29%27%3E%3Cpath d=%27M9.4 0.0 L3.5 4.4 L-2.0 8.8 L-7.4 3.6 L-8.0 -3.9 L-2.1 -9.2 L4.0 -5.1Z%27 fill=%27%235A3A2E%27 stroke=%27%235A3A2E%27 stroke-width=%273%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3Ccircle cx=%2740.2%27 cy=%2713.6%27 r=%272.9%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27144.9%27 cy=%2757.8%27 r=%273.3%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2793.9%27 cy=%27100.8%27 r=%273.3%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27141.3%27 cy=%27102.8%27 r=%273.0%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27160.5%27 cy=%2769.7%27 r=%272.1%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27158.7%27 cy=%27162.1%27 r=%272.8%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2729.6%27 cy=%27161.3%27 r=%272.2%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%27172.5%27 cy=%27135.6%27 r=%272.9%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2720.8%27 cy=%2781.6%27 r=%273.0%27 fill=%27%235A3A2E%27/%3E%3Ccircle cx=%2728.4%27 cy=%2713.1%27 r=%272.6%27 fill=%27%235A3A2E%27/%3E%3C/svg%3E");
 
   --font-display: "DM Serif Display", Georgia, serif;
   --font-body:    "Outfit", system-ui, sans-serif;
   --font-script:  "Parisienne", cursive;
+  --font-logo:    "Bodoni Moda", "Didot", "Bodoni 72", "Playfair Display", Georgia, serif;
 
   --radius:   24px;
   --radius-s: 999px;
-  --shadow:   0 2px 4px rgba(140, 98, 80, .05), 0 16px 36px -18px rgba(140, 98, 80, .35);
-  --shadow-h: 0 4px 8px rgba(201, 112, 126, .08), 0 28px 50px -20px rgba(201, 112, 126, .45);
+  --shadow:   0 2px 4px rgba(122, 86, 64, .05), 0 16px 36px -18px rgba(122, 86, 64, .35);
+  --shadow-h: 0 4px 8px rgba(155, 106, 71, .08), 0 28px 50px -20px rgba(155, 106, 71, .45);
   --ease:     cubic-bezier(.22, .61, .36, 1);
   --bounce:   cubic-bezier(.34, 1.56, .64, 1);
 
@@ -43,7 +44,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(5.5rem + var(--safe-top));  /* que la barra fija no tape los títulos */
+  scroll-padding-top: calc(8rem + var(--safe-top));  /* que la barra fija no tape los títulos */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -79,21 +80,31 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .leo-strip--thin { height: 8px; background-size: 100px; opacity: .9; }
 
-/* ---------- Logo ---------- */
+/* ---------- Logo (hecho con texto y CSS, sin imagen) ----------
+   Círculo delgado + "LeCuration" en serif de alto contraste (la C más grande) + "MX" debajo.
+   Todo se escala con font-size: cambia ese valor para agrandar o achicar el logo. */
 .logo {
-  font-family: var(--font-display);
-  font-size: 1.7rem;
-  letter-spacing: -.01em;
-  color: var(--cocoa);
+  display: inline-grid;
+  place-items: center;
+  align-content: center;
+  flex-shrink: 0;
+  width: 7em;
+  aspect-ratio: 1;
+  border: .07em solid currentColor;
+  border-radius: 50%;
+  font-family: var(--font-logo);
+  font-size: 13px;
+  font-weight: 400;
   line-height: 1;
+  text-align: center;
+  color: var(--cocoa);
+  transition: transform .4s var(--bounce);
 }
-.logo span {
-  font-family: var(--font-script);
-  font-size: 1.5rem;
-  color: var(--rose-deep);
-}
-.logo--light { color: var(--cream); }
-.logo--light span { color: var(--rose); }
+.logo:hover { transform: scale(1.04); }
+.logo__name { display: block; white-space: nowrap; letter-spacing: -.01em; }
+.logo__name b { font-weight: 400; font-size: 1.22em; line-height: .8; }
+.logo__mx { display: block; margin-top: .4em; font-size: .62em; letter-spacing: .05em; }
+.logo--light { color: var(--cream); font-size: 15px; }
 
 /* ---------- Botones ---------- */
 .btn {
@@ -113,9 +124,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .btn--primary {
   background: var(--rose-deep);
   color: var(--cream);
-  box-shadow: 0 10px 24px -10px rgba(201, 112, 126, .8);
+  box-shadow: 0 10px 24px -10px rgba(155, 106, 71, .8);
 }
-.btn--primary:hover { background: var(--mocha); transform: translateY(-3px); box-shadow: 0 16px 28px -12px rgba(140, 98, 80, .7); }
+.btn--primary:hover { background: var(--mocha); transform: translateY(-3px); box-shadow: 0 16px 28px -12px rgba(122, 86, 64, .7); }
 
 .btn--ghost {
   border: 1.5px solid var(--mocha);
@@ -140,7 +151,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background-size: 200% 100%;
   background-position: 0 0;
   color: var(--cream);
-  box-shadow: 0 12px 26px -12px rgba(201, 112, 126, .85);
+  box-shadow: 0 12px 26px -12px rgba(155, 106, 71, .85);
   transition: background-position .5s var(--ease), transform .3s var(--bounce), box-shadow .3s var(--ease), opacity .3s;
 }
 .btn--whatsapp::before {
@@ -167,18 +178,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   top: 0;
   z-index: 40;
   padding-top: var(--safe-top);
-  background: rgba(251, 237, 235, .82);
+  /* Fondo inspirado en tu logo: luz suave a la izquierda y finas líneas verticales sobre crema */
+  background:
+    radial-gradient(ellipse at 6% 50%, rgba(255, 255, 255, .75), transparent 55%),
+    repeating-linear-gradient(90deg, transparent 0 21px, rgba(255, 255, 255, .55) 21px 22px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(255, 255, 255, .35) 47px 48px),
+    linear-gradient(100deg, #FBF6EE 0%, #F0E5D7 55%, #E4D4C1 100%);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  border-bottom: 1px solid rgba(231, 170, 177, .35);
+  border-bottom: 1px solid rgba(196, 164, 132, .45);
 }
 
 .intro {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 15% 25%, rgba(231, 170, 177, .45), transparent 40%),
-    radial-gradient(circle at 90% 70%, rgba(201, 166, 139, .35), transparent 45%),
+    radial-gradient(circle at 15% 25%, rgba(212, 183, 155, .45), transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(196, 164, 132, .35), transparent 45%),
     var(--blush);
 }
 
@@ -187,7 +203,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   align-items: center;
   justify-content: space-between;  /* logo a la izquierda, menú a la derecha */
   gap: 1rem;
-  padding-block: .9rem;
+  padding-block: .55rem;
 }
 .nav__links {
   display: flex;
@@ -488,13 +504,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-radius: 28px;
   background: var(--cream);
   color: var(--cocoa);
-  box-shadow: 0 40px 80px -30px rgba(74, 47, 39, .55);
+  box-shadow: 0 40px 80px -30px rgba(63, 44, 35, .55);
   overflow: hidden;
 }
 .modal[open] { animation: popIn .4s var(--bounce) both; }
 .modal.is-closing { animation: popOut .22s var(--ease) both; }
 .modal::backdrop {
-  background: rgba(74, 47, 39, .35);
+  background: rgba(63, 44, 35, .35);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   animation: fade .3s var(--ease) both;
@@ -698,7 +714,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: grid; place-items: center;
   border-radius: 50%;
   background: var(--rose-deep);
-  box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9);
+  box-shadow: 0 14px 30px -10px rgba(155, 106, 71, .9);
   transition: transform .4s var(--bounce), background .3s;
   z-index: 50;
   animation: pulse 2.8s ease-in-out infinite;
@@ -716,8 +732,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @keyframes popIn  { from { opacity: 0; transform: translateY(30px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes popOut { to { opacity: 0; transform: translateY(20px) scale(.97); } }
 @keyframes pulse  {
-  0%, 100% { box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9), 0 0 0 0 rgba(231, 170, 177, .6); }
-  50%      { box-shadow: 0 14px 30px -10px rgba(201, 112, 126, .9), 0 0 0 12px rgba(231, 170, 177, 0); }
+  0%, 100% { box-shadow: 0 14px 30px -10px rgba(155, 106, 71, .9), 0 0 0 0 rgba(212, 183, 155, .6); }
+  50%      { box-shadow: 0 14px 30px -10px rgba(155, 106, 71, .9), 0 0 0 12px rgba(212, 183, 155, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -749,7 +765,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     overflow: visible;
     padding: 1.6rem max(1.4rem, var(--safe-right)) calc(1.8rem + var(--safe-bottom)) max(1.4rem, var(--safe-left));
   }
-  .modal__close       { background: var(--cream); box-shadow: 0 4px 14px -4px rgba(74, 47, 39, .35); }
+  .modal__close       { background: var(--cream); box-shadow: 0 4px 14px -4px rgba(63, 44, 35, .35); }
 }
 @keyframes sheetIn  { from { transform: translateY(100%); } to { transform: none; } }
 @keyframes sheetOut { to { transform: translateY(100%); } }
@@ -759,8 +775,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   /* en celular el botón de contacto queda solo con el ícono */
   .nav__links a.nav__cta { width: 38px; height: 38px; padding: 0; justify-content: center; border-radius: 50%; }
   .nav__cta span { display: none; }
-  .logo { font-size: 1.4rem; }
-  .logo span { font-size: 1.25rem; }
+  .logo { font-size: 10.5px; }
+  html { scroll-padding-top: calc(6.9rem + var(--safe-top)); }
   .hero__script { right: 0; top: -.9em; }
   .grid { gap: .8rem; }
   .card { padding: .5rem; border-radius: 20px; }
