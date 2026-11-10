@@ -806,7 +806,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     border-radius: 18px 18px 0 0;
     max-height: calc(92dvh - var(--safe-top));
   }
-  .modal[open]        { animation: sheetIn .45s var(--ease) both; }
+  .modal[open] {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+}
   .modal.is-closing   { animation: sheetOut .22s var(--ease) both; }
   .modal__inner       { grid-template-columns: 1fr; grid-auto-rows: max-content; max-height: calc(92dvh - var(--safe-top)); overflow-y: auto; overscroll-behavior: contain; }
   .modal__media       { aspect-ratio: 4 / 3; }
