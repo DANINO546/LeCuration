@@ -913,3 +913,44 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     transform: none !important;
   }
 }
+
+/* CORRECCIÓN DE MOVIMIENTOS EN CELULARES */
+@media (max-width: 720px) {
+
+  /* Ventana de detalles del producto */
+  html body dialog.modal[open] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  html body dialog.modal[open]::backdrop {
+    animation: none !important;
+  }
+
+  /* Animaciones de entrada de las secciones */
+  html.js .reveal,
+  html.js .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ALTURA ESTABLE DE LOS DETALLES EN CELULARES */
+@media (max-width: 720px) {
+
+  dialog.modal {
+    max-height: calc(92svh - var(--safe-top)) !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  dialog.modal .modal__inner {
+    max-height: calc(92svh - var(--safe-top)) !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+}
