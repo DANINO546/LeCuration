@@ -1,5 +1,5 @@
 /* =========================================================
-   LeCuration MX — Boutique (v7)
+   LeCuration MX — Boutique (v10 Animación Limpia y Sin Fantasmas)
    ========================================================= */
 
 :root {
@@ -72,13 +72,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .leo-strip--thin { height: 8px; background-size: 100px; opacity: .9; }
 
-/* El Logo se mantiene por encima del leopardo para ocultarlo cuando camina detrás */
+/* LOGO: FONDO SÓLIDO Y CAPA SUPERIOR (z-index 20) PARA TAPAR AL LEOPARDO */
 .logo {
   position: relative;
-  z-index: 10;
-  display: inline-grid;
-  place-items: center;
-  align-content: center;
+  z-index: 20;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   width: 7.2em;
   aspect-ratio: 1;
@@ -89,16 +90,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-variation-settings: "opsz" 96;
   font-size: 14px;
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.1;
   text-align: center;
   color: var(--cream);
+  background: var(--cocoa); /* Fondo sólido obligatorio para que actúe como muro */
   transition: font-size .45s var(--ease), transform .5s var(--bounce);
 }
 .logo:hover { transform: scale(1.04); }
 .topbar .logo { background: var(--cocoa); }
-.logo__name { display: block; white-space: nowrap; letter-spacing: -.012em; transform: translateY(-.06em); }
-.logo__name b { font-weight: 500; font-size: 1.3em; line-height: .7; letter-spacing: -.02em; }
-.logo__mx { display: block; margin-top: .42em; font-size: .68em; font-weight: 400; letter-spacing: .03em; }
+.logo__name { display: block; white-space: nowrap; letter-spacing: -.012em; }
+.logo__name b { font-weight: 500; font-size: 1.25em; line-height: 1; letter-spacing: -.02em; }
+.logo__mx { display: block; margin-top: .15em; font-size: .7em; font-weight: 400; letter-spacing: .08em; }
 .logo--light { color: var(--cream); font-size: 15px; }
 
 .btn {
@@ -166,9 +168,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: none;
 }
 
-/* =========================================================
-   BARRA SUPERIOR CON ANIMACIÓN DE DERECHA A IZQUIERDA
-   ========================================================= */
+/* BARRA SUPERIOR */
 .topbar {
   position: sticky;
   top: 0;
@@ -179,23 +179,24 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   border-bottom: 1px solid rgba(196, 164, 132, .3);
-  /* Añadimos transición suave para evitar tirones */
   transition: box-shadow .4s var(--ease), padding .3s var(--ease);
 }
 .topbar.is-scrolled { box-shadow: 0 14px 30px -22px rgba(0, 0, 0, .65); }
 .topbar.is-scrolled .logo { font-size: 10.5px; }
 
-/* ---------- Leopardo Caminando (Detrás del Logo, Pausa Larga) ---------- */
+/* LEOPARDO: CAMINA DE DERECHA A IZQUIERDA
+   POR DETRÁS DEL LOGO Y DE LOS ENLACES */
+
 .leopard-walker {
   position: absolute;
   z-index: 2;
-  top: calc(var(--safe-top) + 8px);
-  width: clamp(108px, 12vw, 148px);
+  top: calc(50% - 2px);
+  left: 100%;
+  width: clamp(108px, 12vw, 140px);
   aspect-ratio: 480 / 220;
+  transform: translateY(-50%);
   pointer-events: none;
-  left: 100vw;
-  /* Camina de derecha a izquierda (14s) y desaparece en el logo con pausa de 45s */
-  animation: leopard-walk-to-logo 45s linear infinite;
+  animation: leopard-cross 35s linear infinite;
 }
 
 .leopard-walker__image {
@@ -207,24 +208,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   filter: brightness(1.15) contrast(1.1);
 }
 
-@keyframes leopard-walk-to-logo {
-  0% {
-    left: 100vw;
-    opacity: 1;
+/* RECORRIDO COMPLETO DE DERECHA A IZQUIERDA */
+
+@keyframes leopard-cross {
+  from {
+    left: 100%;
   }
-  28% {
-    /* Llega detrás de la zona del logo a la izquierda */
-    left: clamp(1rem, 4vw, 2rem);
-    opacity: 1;
-  }
-  30% {
-    /* Desaparece completamente detrás del logo */
-    left: clamp(1rem, 4vw, 2rem);
-    opacity: 0;
-  }
-  100% {
-    left: 100vw;
-    opacity: 0;
+
+  to {
+    left: -160px;
   }
 }
 
@@ -755,33 +747,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .footer {
-  background: var(--cocoa);
-  color: rgba(255, 248, 246, .7);
+  background: linear-gradient(100deg, #5A3D2E 0%, #7A5640 55%, #4A3225 100%);
+  color: var(--cream);
   font-size: .85rem;
+  border-top: 1px solid rgba(196, 164, 132, .3);
 }
 .footer__inner {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-top: 2.5rem;
-  padding-bottom: calc(2.5rem + var(--safe-bottom));
+  padding-top: 2.2rem;
+  padding-bottom: calc(2.2rem + var(--safe-bottom));
 }
-.footer__link { color: var(--rose); font-weight: 600; margin-right: 4.5rem; transition: color .25s; }
-.footer__link:hover { color: var(--cream); }
-.footer__link { position: relative; }
-.footer__link::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -4px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .4s var(--ease);
-}
-.footer__link:hover::after { transform: scaleX(1); }
+.footer__copy { color: rgba(255, 250, 243, .8); }
 
 .fab {
   position: fixed;
@@ -857,7 +836,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .card__peek { display: none; }
   .btn--soft { padding: .7rem .6rem; font-size: .78rem; }
   .footer__inner { flex-direction: column; text-align: center; }
-  .footer__link { margin-right: 0; }
   .footer__inner { padding-bottom: calc(6rem + var(--safe-bottom)); }
   .fab { width: 54px; height: 54px; }
 }
@@ -888,4 +866,32 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .card:hover .card__peek { opacity: 0; }
   .card:active { transform: scale(.98); border-color: var(--rose); }
   .step:hover { transform: none; border-color: transparent; box-shadow: none; }
+}
+/* LOGO OFICIAL LECURATION MX */
+.logo-image {
+  display: block;
+  width: clamp(85px, 9vw, 125px);
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 20;
+}
+.logo {
+  cursor: default;
+}
+
+.logo-image {
+  display: block;
+  width: clamp(85px, 9vw, 125px);
+  height: auto;
+  object-fit: contain;
+  cursor: default;
+  pointer-events: none;
+}
+/* QUITAR SOLAMENTE LA ANIMACIÓN DEL LOGO */
+.logo:hover,
+.logo-image:hover {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
 }
