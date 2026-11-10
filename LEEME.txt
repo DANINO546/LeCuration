@@ -1,4 +1,6 @@
-LeCuration MX — archivos actualizados
+LeCuration MX — página actualizada
 
-Abre index.html en el navegador. Conserva style.css en la misma carpeta para que se apliquen los estilos.
-Las fuentes de Google y las fotos del catálogo de ejemplo requieren conexión a internet.
+Descomprime estos archivos en una misma carpeta y abre index.html.
+Conserva style.css y leopard-walk.webp junto a index.html.
+El estampado del fondo es fijo y tenue. El leopardo se anima como un ciclo breve de cuatro poses; se oculta cuando el dispositivo solicita movimiento reducido.
+Las fuentes de Google y las fotos de ejemplo requieren conexión a internet.
