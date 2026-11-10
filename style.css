@@ -888,10 +888,28 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   cursor: default;
   pointer-events: none;
 }
+
 /* QUITAR SOLAMENTE LA ANIMACIÓN DEL LOGO */
 .logo:hover,
 .logo-image:hover {
   animation: none !important;
   transition: none !important;
   transform: none !important;
+}
+
+/* ELIMINAR MOVIMIENTO DE LA VENTANA DE PRODUCTOS EN CELULARES */
+@media (max-width: 720px) {
+  .modal[open] {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* EVITAR QUE LA VENTANA DE PRODUCTOS SE DESPLACE O REBOTE */
+@media (max-width: 720px) {
+  dialog.modal[open] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
