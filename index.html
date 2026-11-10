@@ -182,8 +182,33 @@
     // ✏️ Tu número de WhatsApp (formato: 52 + 10 dígitos, sin espacios ni signos). Cambiarlo aquí actualiza todos los botones.
     const WHATSAPP = "525531045512";
 
-    // ✏️ Edita, agrega o quita productos aquí
-    const PRODUCTS = [
+    // 🗂️ CONEXIÓN CON AIRTABLE (a través de tu Worker de Cloudflare)
+    // El token de Airtable NO va en esta página: vive escondido en el Worker.
+    // Aquí solo se pega la dirección del Worker. Mientras esté vacía, se muestran los productos de ejemplo.
+    const AIRTABLE = {
+      proxy: "https://catalogo-lecuration.danielasando068.workers.dev",             // Ej.: "https://catalogo-lecuration.tuusuario.workers.dev"
+      refrescarCada: 120     // Segundos entre revisiones mientras la página está abierta (0 = solo al abrirla)
+    };
+
+    // Nombres de las columnas en tu tabla. Si le cambias el nombre a una columna en Airtable, cámbialo aquí también.
+    const CAMPOS = {
+      nombre:      "Nombre",
+      precio:      "Precio",
+      etiqueta:    "Etiqueta",              // nuevo, favorito, últimas piezas… (opcional)
+      foto:        "Foto",                  // columna tipo Archivo adjunto (se usa la primera imagen)
+      fotoUrl:     "Foto URL",              // alternativa: un enlace a la imagen
+      alt:         "Texto alternativo",     // opcional (si está vacío se usa el nombre)
+      descripcion: "Descripción",
+      detalles:    "Detalles",              // un detalle por renglón
+      tallas:      "Tallas",                // selección múltiple: S, M, L…
+      agotadas:    "Tallas agotadas",       // selección múltiple: las tallas sin existencia
+      columnas:    "Columnas de medidas",   // texto: Pecho, Largo, Manga
+      medidas:     "Medidas",               // un renglón por talla: S: 46, 64, 18
+      ocultar:     "Ocultar"                // casilla: si la marcas, la prenda no se muestra
+    };
+
+    // ✏️ Productos de ejemplo (se usan solo si Airtable no está configurado)
+    const DEMO_PRODUCTS = [
       {
         name: "Poncho Tejido Arena",
         price: 549,
@@ -267,37 +292,148 @@
     const money = n => "$" + n.toLocaleString("es-MX") + " MXN";
     const $ = id => document.getElementById(id);
 
+    // ---------- Texto seguro (los datos de Airtable nunca se insertan como código) ----------
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    // ---------- Airtable → productos de la página ----------
+    // <airtable-core>
+    const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Crect width='4' height='4' fill='%23E6D5C1'/%3E%3C/svg%3E";
+    const SIZE_ORDER = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "UNITALLA"];
+    const lista  = v => (Array.isArray(v) ? v : (v ? String(v).split(",") : [])).map(s => String(s).trim()).filter(Boolean);
+    const lineas = v => String(v || "").split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+
+    function sortSizes(sizes) {
+      const num = s => (/^\d+(\.\d+)?$/.test(s.label) ? parseFloat(s.label) : null);
+      const pos = s => SIZE_ORDER.indexOf(s.label.toUpperCase());
+      return sizes.slice().sort((a, b) => {
+        if (num(a) !== null && num(b) !== null) return num(a) - num(b);
+        if (pos(a) >= 0 && pos(b) >= 0) return pos(a) - pos(b);
+        return 0;
+      });
+    }
+
+    function recordToProduct(r) {
+      const f = r.fields || {}, c = CAMPOS;
+      const name = String(f[c.nombre] || "").trim();
+      const price = Number(f[c.precio]);
+      if (!name || !isFinite(price) || f[c.ocultar]) return null;   // sin nombre/precio o marcada como oculta
+
+      // Foto: primero la columna de archivo adjunto, si no, el enlace
+      const foto = Array.isArray(f[c.foto]) ? f[c.foto][0] : null;
+      const img = foto ? ((foto.thumbnails && foto.thumbnails.full && foto.thumbnails.full.url) || foto.url)
+                       : String(f[c.fotoUrl] || "").trim();
+      const thumb = foto ? ((foto.thumbnails && foto.thumbnails.large && foto.thumbnails.large.url) || img) : img;
+
+      // Tallas (si no hay ninguna, es "Unitalla")
+      const todas = lista(f[c.tallas]);
+      const agot  = lista(f[c.agotadas]).map(s => s.toUpperCase());
+      const sizes = sortSizes((todas.length ? todas : ["Unitalla"]).map(label => ({ label, stock: !agot.includes(label.toUpperCase()) })));
+
+      // Medidas: un renglón por talla → "S: 46, 64, 18"
+      const measures = {};
+      lineas(f[c.medidas]).forEach(line => {
+        const i = line.indexOf(":");
+        if (i < 1) return;
+        const key = line.slice(0, i).trim();
+        const vals = line.slice(i + 1).split(",").map(s => s.trim()).filter(Boolean);
+        const match = sizes.find(s => s.label.toUpperCase() === key.toUpperCase());
+        measures[match ? match.label : key] = vals;
+      });
+      let cols = lista(f[c.columnas]);
+      if (!cols.length) {
+        const n = Math.max(0, ...Object.values(measures).map(v => v.length));
+        cols = Array.from({ length: n }, (_, k) => "Medida " + (k + 1));
+      }
+
+      return {
+        id: r.id,
+        name, price,
+        tag: String(f[c.etiqueta] || "").trim(),
+        img: img || PLACEHOLDER_IMG,
+        thumb: thumb || PLACEHOLDER_IMG,
+        imgKey: foto ? foto.id : img,                     // identifica la foto aunque su enlace cambie
+        alt: String(f[c.alt] || "").trim() || name,
+        desc: String(f[c.descripcion] || "").trim(),
+        details: lineas(f[c.detalles]),
+        sizes, cols, measures
+      };
+    }
+    // </airtable-core>
+
+    const airtableListo = Boolean(AIRTABLE.proxy);
+
+    async function fetchAirtable() {
+      const res = await fetch(AIRTABLE.proxy, { cache: "no-store" });
+      if (!res.ok) throw new Error("El Worker respondió " + res.status + ": " + await res.text());
+      const data = await res.json();
+      if (!Array.isArray(data.records)) throw new Error("Respuesta inesperada del Worker: " + JSON.stringify(data).slice(0, 300));
+      return data.records;
+    }
+
     // ---------- Pintar tarjetas ----------
     const grid = $("grid");
-    PRODUCTS.forEach((p, i) => {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.tabIndex = 0;
-      card.setAttribute("role", "button");
-      card.setAttribute("aria-label", `Ver detalles de ${p.name}`);
-      card.style.animationDelay = (i * 0.07) + "s";
-      card.innerHTML = `
-        <div class="card__media">
-          <img src="${p.img.replace("w=900&h=900", "w=600&h=600")}" alt="${p.alt}" loading="lazy" />
-          ${p.tag ? `<span class="card__tag">${p.tag}</span>` : ""}
-          <span class="card__peek">Ver detalles ✦</span>
-        </div>
-        <div class="card__body">
-          <div class="card__row">
-            <h3 class="card__name">${p.name}</h3>
-            <p class="card__price">${money(p.price)}</p>
+    let PRODUCTS = DEMO_PRODUCTS;
+
+    function gridMessage(text, loading) {
+      grid.innerHTML = `<p class="grid__msg${loading ? " is-loading" : ""}">${esc(text)}</p>`;
+    }
+
+    function renderGrid() {
+      grid.innerHTML = "";
+      if (!PRODUCTS.length) { gridMessage("Pronto agregaremos nuevas piezas ✿"); return; }
+      PRODUCTS.forEach((p, i) => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Ver detalles de ${p.name}`);
+        card.style.animationDelay = (Math.min(i, 12) * 0.07) + "s";
+        const thumb = p.thumb || p.img.replace("w=900&h=900", "w=600&h=600");
+        card.innerHTML = `
+          <div class="card__media">
+            <img src="${esc(thumb)}" alt="${esc(p.alt)}" loading="lazy" />
+            ${p.tag ? `<span class="card__tag">${esc(p.tag)}</span>` : ""}
+            <span class="card__peek">Ver detalles ✦</span>
           </div>
-          <ul class="sizes-mini" aria-label="Tallas disponibles">
-            ${p.sizes.map(s => `<li class="${s.stock ? "" : "is-out"}">${s.label}</li>`).join("")}
-          </ul>
-          <span class="btn btn--soft">Ver detalles y tallas</span>
-        </div>`;
-      card.addEventListener("click", () => openModal(i));
-      card.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(i); }
+          <div class="card__body">
+            <div class="card__row">
+              <h3 class="card__name">${esc(p.name)}</h3>
+              <p class="card__price">${money(p.price)}</p>
+            </div>
+            <ul class="sizes-mini" aria-label="Tallas disponibles">
+              ${p.sizes.map(s => `<li class="${s.stock ? "" : "is-out"}">${esc(s.label)}</li>`).join("")}
+            </ul>
+            <span class="btn btn--soft">Ver detalles y tallas</span>
+          </div>`;
+        card.addEventListener("click", () => openModal(i));
+        card.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(i); }
+        });
+        grid.appendChild(card);
       });
-      grid.appendChild(card);
-    });
+    }
+
+    // ---------- Cargar el catálogo (Airtable o ejemplo) ----------
+    let firma = "";
+    async function cargarCatalogo(primera) {
+      if (!airtableListo) { PRODUCTS = DEMO_PRODUCTS; renderGrid(); return; }
+      if (primera) gridMessage("Cargando catálogo…", true);
+      try {
+        const nuevos = (await fetchAirtable()).map(recordToProduct).filter(Boolean);
+        // Se compara sin los enlaces de las fotos (Airtable los renueva en cada consulta)
+        const nuevaFirma = JSON.stringify(nuevos.map(({ img, thumb, ...resto }) => resto));
+        const cambio = nuevaFirma !== firma;
+        PRODUCTS = nuevos;                       // siempre quedan los enlaces de foto más frescos
+        if (cambio) { firma = nuevaFirma; renderGrid(); }
+      } catch (err) {
+        console.error("No se pudo leer Airtable:", err);
+        if (primera) gridMessage("No pudimos cargar el catálogo en este momento. Intenta de nuevo en unos minutos.");
+      }
+    }
+    cargarCatalogo(true);
+    if (airtableListo && AIRTABLE.refrescarCada > 0) {
+      setInterval(() => { if (!document.hidden && !modal.open) cargarCatalogo(false); }, AIRTABLE.refrescarCada * 1000);
+    }
 
     // ---------- Ventana de detalles ----------
     const modal = $("modal");
@@ -313,7 +449,7 @@
       $("m-name").textContent = current.name;
       $("m-price").textContent = money(current.price);
       $("m-desc").textContent = current.desc;
-      $("m-details").innerHTML = current.details.map(d => `<li>${d}</li>`).join("");
+      $("m-details").innerHTML = current.details.map(d => `<li>${esc(d)}</li>`).join("");
 
       const tag = $("m-tag");
       tag.hidden = !current.tag;
@@ -321,16 +457,18 @@
 
       // Tallas
       $("m-sizes").innerHTML = current.sizes.map(s => `
-        <button type="button" role="radio" aria-checked="false" class="size" data-size="${s.label}" ${s.stock ? "" : "disabled title='Agotada'"}>
-          ${s.label}${s.stock ? "" : "<small>agotada</small>"}
+        <button type="button" role="radio" aria-checked="false" class="size" data-size="${esc(s.label)}" ${s.stock ? "" : "disabled title='Agotada'"}>
+          ${esc(s.label)}${s.stock ? "" : "<small>agotada</small>"}
         </button>`).join("");
 
       // Tabla de medidas
       $("m-measures").innerHTML = `
-        <thead><tr><th>Talla</th>${current.cols.map(c => `<th>${c}</th>`).join("")}</tr></thead>
+        <thead><tr><th>Talla</th>${current.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead>
         <tbody>${Object.entries(current.measures).map(([size, vals]) =>
-          `<tr data-row="${size}"><td>${size}</td>${vals.map(v => `<td>${v}</td>`).join("")}</tr>`).join("")}
+          `<tr data-row="${esc(size)}"><td>${esc(size)}</td>${vals.map(v => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}
         </tbody>`;
+      // Si la prenda no tiene medidas, se oculta esa sección
+      $("m-measures").closest(".modal__block").style.display = Object.keys(current.measures).length ? "" : "none";
 
       // Si solo hay una talla disponible, se selecciona sola
       const available = current.sizes.filter(s => s.stock);

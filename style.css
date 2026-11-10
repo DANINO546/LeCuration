@@ -420,6 +420,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   align-items: stretch;
 }
 
+/* Mensajes del catálogo (cargando, vacío o con error) */
+.grid__msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--taupe);
+  font-weight: 300;
+  letter-spacing: .04em;
+  padding: 4rem 1rem;
+}
+.grid__msg.is-loading { animation: softPulse 1.6s ease-in-out infinite; }
+@keyframes softPulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+
 .card {
   position: relative;
   display: flex;
