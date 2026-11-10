@@ -313,7 +313,10 @@
     }
 
     function recordToProduct(r) {
-      const f = r.fields || {}, c = CAMPOS;
+      // Limpia los nombres de columna: quita espacios y caracteres invisibles (p. ej. el que deja un CSV al importarlo)
+      const f = {};
+      Object.entries(r.fields || {}).forEach(([k, v]) => { f[k.replace(/[\u200B-\u200D\uFEFF]/g, "").trim()] = v; });
+      const c = CAMPOS;
       const name = String(f[c.nombre] || "").trim();
       const price = Number(f[c.precio]);
       if (!name || !isFinite(price) || f[c.ocultar]) return null;   // sin nombre/precio o marcada como oculta
