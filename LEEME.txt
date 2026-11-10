@@ -1,0 +1,4 @@
+LeCuration MX — archivos actualizados
+
+Abre index.html en el navegador. Conserva style.css en la misma carpeta para que se apliquen los estilos.
+Las fuentes de Google y las fotos del catálogo de ejemplo requieren conexión a internet.
