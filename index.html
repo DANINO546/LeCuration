@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <!-- viewport-fit=cover habilita las "safe areas" en celulares con notch o barra de gestos -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#F7EFE5" />
+  <meta name="theme-color" content="#3F2C23" />
   <title>LeCuration MX — Boutique & Catálogo</title>
   <meta name="description" content="Catálogo boutique de LeCuration MX. Prendas chic en tonos café y crema. Pedidos directos y personalizados por WhatsApp." />
 
@@ -13,17 +12,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Parisienne&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&display=swap" rel="stylesheet" />
 
-  <!-- Marca que hay JavaScript: activa las animaciones de aparición (si no hay, todo se ve normal) -->
   <script>document.documentElement.classList.add("js");</script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ============ BARRA SUPERIOR (fija) ============ -->
+  <!-- ============ BARRA SUPERIOR ============ -->
   <header class="topbar">
     <div class="leo-strip" aria-hidden="true"></div>
     <nav class="nav container" aria-label="Principal">
-      <a href="#" class="logo" aria-label="LeCuration MX, inicio"><span class="logo__name">Le<b>C</b>uration</span><span class="logo__mx">MX</span></a>
+      <a href="#" class="logo" aria-label="LeCuration MX, inicio">
+        <span class="logo__name">Le<b>C</b>uration</span>
+        <span class="logo__mx">MX</span>
+      </a>
       <ul class="nav__links">
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#como-comprar">Cómo comprar</a></li>
@@ -35,28 +36,28 @@
         </li>
       </ul>
     </nav>
+    
+    <!-- Animación de leopardo centrado -->
     <div class="leopard-walker" aria-hidden="true">
       <img class="leopard-walker__image" src="leopard-walk.webp" alt="" />
     </div>
+    <div class="leo-strip" aria-hidden="true"></div>
   </header>
 
   <!-- ============ PORTADA ============ -->
   <section class="intro">
     <div class="hero container">
       <p class="hero__eyebrow">LeCuration MX · piezas para tu estilo</p>
+      
       <h1 class="hero__title">
-        Tu clóset,<br />
-        pero más <em>bonito</em>
+        Moda en constante evolución,<br />
+        <em>elegida para ti</em>
       </h1>
-      <p class="hero__tagline">Moda en constante evolución, elegida para ti.</p>
+      
       <p class="hero__subtitle">
         Piezas chic y cómodas en tonos café y crema. Cada pedido se hace de forma
         <strong>directa y personalizada</strong> por WhatsApp. 💌
       </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="#catalogo">Ver catálogo</a>
-        <a class="btn btn--ghost" href="https://wa.me/525531045512?text=Hola%20%F0%9F%92%95%20quiero%20informaci%C3%B3n%20del%20cat%C3%A1logo" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-      </div>
     </div>
 
     <div class="marquee" aria-hidden="true">
@@ -82,7 +83,6 @@
         <p class="section-text">Toca cualquier prenda para ver medidas, elegir tu talla y pedirla por WhatsApp.</p>
       </div>
 
-      <!-- Las tarjetas se generan desde la lista de productos (ver script al final) -->
       <div class="grid" id="grid"></div>
     </section>
 
@@ -132,9 +132,11 @@
   <footer class="footer">
     <div class="leo-strip leo-strip--thin" aria-hidden="true"></div>
     <div class="container footer__inner">
-      <a href="#" class="logo logo--light" aria-label="LeCuration MX, inicio"><span class="logo__name">Le<b>C</b>uration</span><span class="logo__mx">MX</span></a>
+      <a href="#" class="logo logo--light" aria-label="LeCuration MX, inicio">
+        <span class="logo__name">Le<b>C</b>uration</span>
+        <span class="logo__mx">MX</span>
+      </a>
       <p class="footer__copy">© 2026 LeCuration MX · Catálogo de demostración</p>
-      <a class="footer__link" href="https://wa.me/525531045512" target="_blank" rel="noopener">Escríbenos por WhatsApp →</a>
     </div>
   </footer>
 
@@ -145,7 +147,6 @@
 
   <!-- ============ VENTANA DE DETALLES ============ -->
   <dialog class="modal" id="modal" aria-labelledby="m-name">
-    <!-- El botón de cerrar va fuera del contenido para que no se desplace al hacer scroll -->
     <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
     <div class="modal__inner">
 
@@ -181,37 +182,30 @@
     </div>
   </dialog>
 
-  <!-- ============ DATOS Y COMPORTAMIENTO ============ -->
   <script>
-    // ✏️ Tu número de WhatsApp (formato: 52 + 10 dígitos, sin espacios ni signos). Cambiarlo aquí actualiza todos los botones.
     const WHATSAPP = "525531045512";
 
-    // 🗂️ CONEXIÓN CON AIRTABLE (a través de tu Worker de Cloudflare)
-    // El token de Airtable NO va en esta página: vive escondido en el Worker.
-    // Aquí solo se pega la dirección del Worker. Mientras esté vacía, se muestran los productos de ejemplo.
     const AIRTABLE = {
-      proxy: "https://catalogo-lecuration.danielasando068.workers.dev",             // Ej.: "https://catalogo-lecuration.tuusuario.workers.dev"
-      refrescarCada: 120     // Segundos entre revisiones mientras la página está abierta (0 = solo al abrirla)
+      proxy: "https://catalogo-lecuration.danielasando068.workers.dev",
+      refrescarCada: 120
     };
 
-    // Nombres de las columnas en tu tabla. Si le cambias el nombre a una columna en Airtable, cámbialo aquí también.
     const CAMPOS = {
       nombre:      "Nombre",
       precio:      "Precio",
-      etiqueta:    "Etiqueta",              // nuevo, favorito, últimas piezas… (opcional)
-      foto:        "Foto",                  // columna tipo Archivo adjunto (se usa la primera imagen)
-      fotoUrl:     "Foto URL",              // alternativa: un enlace a la imagen
-      alt:         "Texto alternativo",     // opcional (si está vacío se usa el nombre)
+      etiqueta:    "Etiqueta",
+      foto:        "Foto",
+      fotoUrl:     "Foto URL",
+      alt:         "Texto alternativo",
       descripcion: "Descripción",
-      detalles:    "Detalles",              // un detalle por renglón
-      tallas:      "Tallas",                // selección múltiple: S, M, L…
-      agotadas:    "Tallas agotadas",       // selección múltiple: las tallas sin existencia
-      columnas:    "Columnas de medidas",   // texto: Pecho, Largo, Manga
-      medidas:     "Medidas",               // un renglón por talla: S: 46, 64, 18
-      ocultar:     "Ocultar"                // casilla: si la marcas, la prenda no se muestra
+      detalles:    "Detalles",
+      tallas:      "Tallas",
+      agotadas:    "Tallas agotadas",
+      columnas:    "Columnas de medidas",
+      medidas:     "Medidas",
+      ocultar:     "Ocultar"
     };
 
-    // ✏️ Productos de ejemplo (se usan solo si Airtable no está configurado)
     const DEMO_PRODUCTS = [
       {
         name: "Poncho Tejido Arena",
@@ -287,20 +281,14 @@
       }
     ];
 
-    // ---------- Todos los enlaces de WhatsApp usan el número de arriba ----------
     document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
       a.href = a.href.replace(/wa\.me\/\d+/, "wa.me/" + WHATSAPP);
     });
 
-    // ---------- Utilidades ----------
     const money = n => "$" + n.toLocaleString("es-MX") + " MXN";
     const $ = id => document.getElementById(id);
-
-    // ---------- Texto seguro (los datos de Airtable nunca se insertan como código) ----------
     const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-    // ---------- Airtable → productos de la página ----------
-    // <airtable-core>
     const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Crect width='4' height='4' fill='%23E6D5C1'/%3E%3C/svg%3E";
     const SIZE_ORDER = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "UNITALLA"];
     const lista  = v => (Array.isArray(v) ? v : (v ? String(v).split(",") : [])).map(s => String(s).trim()).filter(Boolean);
@@ -317,26 +305,22 @@
     }
 
     function recordToProduct(r) {
-      // Limpia los nombres de columna: quita espacios y caracteres invisibles (p. ej. el que deja un CSV al importarlo)
       const f = {};
       Object.entries(r.fields || {}).forEach(([k, v]) => { f[k.replace(/[\u200B-\u200D\uFEFF]/g, "").trim()] = v; });
       const c = CAMPOS;
       const name = String(f[c.nombre] || "").trim();
       const price = Number(f[c.precio]);
-      if (!name || !isFinite(price) || f[c.ocultar]) return null;   // sin nombre/precio o marcada como oculta
+      if (!name || !isFinite(price) || f[c.ocultar]) return null;
 
-      // Foto: primero la columna de archivo adjunto, si no, el enlace
       const foto = Array.isArray(f[c.foto]) ? f[c.foto][0] : null;
       const img = foto ? ((foto.thumbnails && foto.thumbnails.full && foto.thumbnails.full.url) || foto.url)
                        : String(f[c.fotoUrl] || "").trim();
       const thumb = foto ? ((foto.thumbnails && foto.thumbnails.large && foto.thumbnails.large.url) || img) : img;
 
-      // Tallas (si no hay ninguna, es "Unitalla")
       const todas = lista(f[c.tallas]);
       const agot  = lista(f[c.agotadas]).map(s => s.toUpperCase());
       const sizes = sortSizes((todas.length ? todas : ["Unitalla"]).map(label => ({ label, stock: !agot.includes(label.toUpperCase()) })));
 
-      // Medidas: un renglón por talla → "S: 46, 64, 18"
       const measures = {};
       lineas(f[c.medidas]).forEach(line => {
         const i = line.indexOf(":");
@@ -358,14 +342,13 @@
         tag: String(f[c.etiqueta] || "").trim(),
         img: img || PLACEHOLDER_IMG,
         thumb: thumb || PLACEHOLDER_IMG,
-        imgKey: foto ? foto.id : img,                     // identifica la foto aunque su enlace cambie
+        imgKey: foto ? foto.id : img,
         alt: String(f[c.alt] || "").trim() || name,
         desc: String(f[c.descripcion] || "").trim(),
         details: lineas(f[c.detalles]),
         sizes, cols, measures
       };
     }
-    // </airtable-core>
 
     const airtableListo = Boolean(AIRTABLE.proxy);
 
@@ -377,7 +360,6 @@
       return data.records;
     }
 
-    // ---------- Pintar tarjetas ----------
     const grid = $("grid");
     let PRODUCTS = DEMO_PRODUCTS;
 
@@ -420,17 +402,15 @@
       });
     }
 
-    // ---------- Cargar el catálogo (Airtable o ejemplo) ----------
     let firma = "";
     async function cargarCatalogo(primera) {
       if (!airtableListo) { PRODUCTS = DEMO_PRODUCTS; renderGrid(); return; }
       if (primera) gridMessage("Cargando catálogo…", true);
       try {
         const nuevos = (await fetchAirtable()).map(recordToProduct).filter(Boolean);
-        // Se compara sin los enlaces de las fotos (Airtable los renueva en cada consulta)
         const nuevaFirma = JSON.stringify(nuevos.map(({ img, thumb, ...resto }) => resto));
         const cambio = nuevaFirma !== firma;
-        PRODUCTS = nuevos;                       // siempre quedan los enlaces de foto más frescos
+        PRODUCTS = nuevos;
         if (cambio) { firma = nuevaFirma; renderGrid(); }
       } catch (err) {
         console.error("No se pudo leer Airtable:", err);
@@ -442,7 +422,6 @@
       setInterval(() => { if (!document.hidden && !modal.open) cargarCatalogo(false); }, AIRTABLE.refrescarCada * 1000);
     }
 
-    // ---------- Ventana de detalles ----------
     const modal = $("modal");
     let current = null;
     let chosen = null;
@@ -462,22 +441,18 @@
       tag.hidden = !current.tag;
       tag.textContent = current.tag;
 
-      // Tallas
       $("m-sizes").innerHTML = current.sizes.map(s => `
         <button type="button" role="radio" aria-checked="false" class="size" data-size="${esc(s.label)}" ${s.stock ? "" : "disabled title='Agotada'"}>
           ${esc(s.label)}${s.stock ? "" : "<small>agotada</small>"}
         </button>`).join("");
 
-      // Tabla de medidas
       $("m-measures").innerHTML = `
         <thead><tr><th>Talla</th>${current.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead>
         <tbody>${Object.entries(current.measures).map(([size, vals]) =>
           `<tr data-row="${esc(size)}"><td>${esc(size)}</td>${vals.map(v => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}
         </tbody>`;
-      // Si la prenda no tiene medidas, se oculta esa sección
       $("m-measures").closest(".modal__block").style.display = Object.keys(current.measures).length ? "" : "none";
 
-      // Si solo hay una talla disponible, se selecciona sola
       const available = current.sizes.filter(s => s.stock);
       if (current.sizes.length === 1 && available.length === 1) selectSize(available[0].label);
       else updateCta();
@@ -532,19 +507,21 @@
     }
     modal.addEventListener("close", () => document.body.classList.remove("no-scroll"));
     modal.querySelector("[data-close]").addEventListener("click", closeModal);
-    // Cerrar al tocar fuera de la ventana
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-    // Animación suave también al cerrar con Esc
     modal.addEventListener("cancel", e => { e.preventDefault(); closeModal(); });
 
-    // ---------- Efectos de la página ----------
-    // La barra superior se compacta al bajar
     const topbar = document.querySelector(".topbar");
-    const onScroll = () => topbar.classList.toggle("is-scrolled", window.scrollY > 40);
+    // Subimos el umbral a 60px y agregamos un pequeño margen de histéresis
+    const onScroll = () => {
+      if (window.scrollY > 60) {
+        topbar.classList.add("is-scrolled");
+      } else if (window.scrollY < 20) {
+        topbar.classList.remove("is-scrolled");
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Los títulos y los pasos aparecen suavemente al llegar a ellos
     const toReveal = document.querySelectorAll(".reveal, .steps");
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(entries => {
