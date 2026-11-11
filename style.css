@@ -869,7 +869,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 @media (max-width: 340px) {
-  .nav__links li:nth-child(2) { display: none; }
+  .nav { gap: .35rem; }
+  .nav__links { gap: 0; }
+  .nav__links li:nth-child(2) { display: block; }
+  .nav__links a {
+    font-size: .56rem;
+    letter-spacing: .02em;
+    padding-inline: .25rem;
+    white-space: nowrap;
+  }
 }
 
 @media (min-width: 1200px) {
