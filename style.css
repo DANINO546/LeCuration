@@ -38,6 +38,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   scroll-padding-top: calc(8rem + var(--safe-top));
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -52,7 +53,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-body.no-scroll { overflow: hidden; }
+body.no-scroll { overflow: hidden; overscroll-behavior: none; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
@@ -582,16 +583,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .modal__inner {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
+  width: 100%;
+  min-width: 0;
   max-height: calc(100dvh - 2rem - var(--safe-top) - var(--safe-bottom));
+  overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 .modal__media {
   position: relative;
+  min-width: 0;
   background: var(--nude);
 }
 .modal__media img { width: 100%; height: 100%; object-fit: cover; }
 
 .modal__info {
   overflow-y: auto;
+  min-width: 0;
   padding: 2.4rem 2.2rem 2rem;
   display: flex;
   flex-direction: column;
@@ -622,7 +629,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .modal__details { display: grid; gap: .3rem; font-size: .9rem; }
 .modal__details li::before { content: "♡"; color: var(--rose-deep); margin-right: .55rem; }
 
-.modal__block { display: grid; gap: .6rem; }
+.modal__block { display: grid; min-width: 0; gap: .6rem; }
 .modal__label { font-weight: 600; font-size: .9rem; }
 .modal__label span { font-weight: 400; color: var(--taupe); }
 
@@ -652,7 +659,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .size:disabled { opacity: .45; cursor: not-allowed; text-decoration: line-through; }
 .size small { font-size: .62rem; font-weight: 500; text-decoration: none; }
 
-.table-wrap { overflow-x: auto; border-radius: 6px; border: 1px solid var(--petal); }
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+  border: 1px solid var(--petal);
+}
 .measures { width: 100%; border-collapse: collapse; font-size: .88rem; text-align: center; }
 .measures th {
   background: var(--blush);
@@ -816,7 +832,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: none !important;
 }
   .modal.is-closing   { animation: sheetOut .22s var(--ease) both; }
-  .modal__inner       { grid-template-columns: 1fr; grid-auto-rows: max-content; max-height: calc(92dvh - var(--safe-top)); overflow-y: auto; overscroll-behavior: contain; }
+  .modal__inner       { grid-template-columns: minmax(0, 1fr); grid-auto-rows: max-content; min-width: 0; max-height: calc(92dvh - var(--safe-top)); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
   .modal__media       { aspect-ratio: 4 / 3; }
   .modal__info {
     overflow: visible;
@@ -873,7 +889,31 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .card:hover .btn--soft { background: var(--petal); color: var(--cocoa); }
   .card:hover .card__peek { opacity: 0; }
   .card:active { transform: scale(.98); border-color: var(--rose); }
+  .card:focus-visible {
+    transform: none;
+    border-color: var(--rose);
+    box-shadow: var(--shadow);
+    outline: 2px solid var(--rose);
+    outline-offset: 2px;
+  }
+  .card:focus-visible .card__name::after { transform: scaleX(0); }
+  .card:focus-visible .btn--soft { background: var(--petal); color: var(--cocoa); }
   .step:hover { transform: none; border-color: transparent; box-shadow: none; }
+  /* En móviles, la franja y WhatsApp no pulsan ni se desplazan solos. */
+  .marquee__track {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .4rem .7rem;
+    white-space: normal;
+    font-size: .7rem;
+    letter-spacing: .12em;
+    animation: none;
+  }
+  .marquee__track span { flex: 1 1 42%; text-align: center; }
+  .marquee__track i,
+  .marquee__track > :nth-child(n + 9) { display: none; }
+  .fab { animation: none; }
 }
 /* LOGO OFICIAL LECURATION MX */
 .logo-image {
@@ -1003,8 +1043,10 @@ html.js .reveal.is-visible {
   transition: none !important;
 }
 
-/* 4. EVITAR MOVIMIENTOS DEL CONTENIDO DEL MODAL */
+/* 4. Mantener el desplazamiento dentro de la ficha */
 html body dialog.modal .modal__inner {
+  min-width: 0;
+  overflow-x: hidden;
   overflow-y: auto;
-  overscroll-behavior: auto;
+  overscroll-behavior: contain;
 }
