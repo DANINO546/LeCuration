@@ -907,20 +907,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .card:focus-visible .card__name::after { transform: scaleX(0); }
   .card:focus-visible .btn--soft { background: var(--petal); color: var(--cocoa); }
   .step:hover { transform: none; border-color: transparent; box-shadow: none; }
-  /* En móviles, la franja y WhatsApp no pulsan ni se desplazan solos. */
-  .marquee__track {
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .4rem .7rem;
-    white-space: normal;
-    font-size: .7rem;
-    letter-spacing: .12em;
-    animation: none;
-  }
-  .marquee__track span { flex: 1 1 42%; text-align: center; }
-  .marquee__track i,
-  .marquee__track > :nth-child(n + 9) { display: none; }
+  /* La franja conserva su movimiento continuo en pantallas táctiles. */
+  .marquee:hover .marquee__track { animation-play-state: running; }
   .fab { animation: none; }
 }
 /* LOGO OFICIAL LECURATION MX */
