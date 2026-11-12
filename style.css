@@ -1164,13 +1164,29 @@ html body dialog.modal .modal__inner {
     line-height: 1 !important;
   }
 }
+/* =========================================================
+   Ajuste de Scroll y Altura para la ventana de FAQ en Móvil
+   ========================================================= */
+
 @media (max-width: 720px) {
-  /* Centramos la ventana emergente de Preguntas Frecuentes en pantalla */
   dialog.modal.modal-faq {
     margin: auto !important;
-    width: calc(100% - 2rem) !important;
-    max-width: 500px !important;
-    border-radius: 16px !important;
-    max-height: 85dvh !important;
+    width: calc(100% - 1.5rem) !important;
+    max-width: 480px !important;
+    border-radius: 18px !important;
+    /* Limitamos la altura máxima y permitimos que el navegador active el scroll interno */
+    max-height: 82dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  /* Hacemos que toda el área de texto y preguntas tenga scroll fluido */
+  dialog.modal.modal-faq .faq-content-area {
+    overflow-y: auto !important;
+    max-height: 82dvh !important;
+    /* Añadimos espacio generoso abajo para que el botón respire y se deslize cómodo */
+    padding-bottom: 2.5rem !important;
+    -webkit-overflow-scrolling: touch;
   }
 }
