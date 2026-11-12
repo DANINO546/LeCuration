@@ -52,6 +52,8 @@ body {
   color: var(--cocoa);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* Espacio superior para que la barra fija no tape la portada */
+  padding-top: 115px;
 }
 body.no-scroll { overflow: hidden; overscroll-behavior: none; }
 img { display: block; max-width: 100%; height: auto; }
@@ -98,7 +100,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: font-size .45s var(--ease), transform .5s var(--bounce);
 }
 .logo:hover { transform: scale(1.04); }
-.topbar .logo { background: var(--cocoa); }
+.topbar-fixed .logo { background: var(--cocoa); }
 .logo__name { display: block; white-space: nowrap; letter-spacing: -.012em; }
 .logo__name b { font-weight: 500; font-size: 1.25em; line-height: 1; letter-spacing: -.02em; }
 .logo__mx { display: block; margin-top: .15em; font-size: .7em; font-weight: 400; letter-spacing: .08em; }
@@ -169,21 +171,24 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: none;
 }
 
-/* BARRA SUPERIOR */
-.topbar {
-  position: sticky;
+/* BARRA SUPERIOR FIJA PERMANENTE */
+.topbar-fixed {
+  position: fixed;
   top: 0;
-  z-index: 40;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
   isolation: isolate;
   padding-top: var(--safe-top);
   background: linear-gradient(100deg, #5A3D2E 0%, #7A5640 55%, #4A3225 100%);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   border-bottom: 1px solid rgba(196, 164, 132, .3);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
   transition: box-shadow .4s var(--ease), padding .3s var(--ease);
 }
-.topbar.is-scrolled { box-shadow: 0 14px 30px -22px rgba(0, 0, 0, .65); }
-.topbar.is-scrolled .logo { font-size: 10.5px; }
+.topbar-fixed.is-scrolled { box-shadow: 0 14px 30px -22px rgba(0, 0, 0, .65); }
+.topbar-fixed.is-scrolled .logo { font-size: 10.5px; }
 
 /* LEOPARDO: CAMINA DE DERECHA A IZQUIERDA
    POR DETRÁS DEL LOGO Y DE LOS ENLACES */
@@ -361,6 +366,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   animation: scroll 30s linear infinite;
 }
 .marquee__track i { font-style: normal; color: var(--latte); }
+.marquee:hover .marquee__track { animation-play-state: paused; }
 
 .section-head { text-align: center; margin: 0 auto 3rem; max-width: 560px; }
 .section-kicker {
@@ -799,8 +805,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .fab:hover { transform: scale(1.1) rotate(-6deg); background: var(--mocha); }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-/* Compensa media separación para que las dos copias empalmen sin salto. */
-@keyframes scroll { to { transform: translateX(calc(-50% - 1.1rem)); } }
+@keyframes scroll { to { transform: translateX(-50%); } }
 @keyframes fade   { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn  { from { opacity: 0; transform: translateY(30px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes popOut { to { opacity: 0; transform: translateY(20px) scale(.97); } }
@@ -844,9 +849,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @keyframes sheetOut { to { transform: translateY(100%); } }
 
 @media (max-width: 600px) {
+  body { padding-top: 85px; }
   .nav__links a { font-size: .64rem; letter-spacing: .1em; padding: .45rem .5rem; }
   .nav__links a:not(.nav__cta)::after { left: .5rem; right: .5rem; }
-  .topbar.is-scrolled .logo { font-size: 9.5px; }
+  .topbar-fixed.is-scrolled .logo { font-size: 9.5px; }
   .nav__links a.nav__cta { width: 38px; height: 38px; padding: 0; justify-content: center; border-radius: 50%; }
   .nav__cta span { display: none; }
   .logo { font-size: 10.5px; }
@@ -907,10 +913,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .card:focus-visible .card__name::after { transform: scaleX(0); }
   .card:focus-visible .btn--soft { background: var(--petal); color: var(--cocoa); }
   .step:hover { transform: none; border-color: transparent; box-shadow: none; }
-  /* La franja conserva su movimiento continuo en pantallas táctiles. */
   .marquee:hover .marquee__track { animation-play-state: running; }
   .fab { animation: none; }
 }
+
 /* LOGO OFICIAL LECURATION MX */
 .logo-image {
   display: block;
@@ -919,21 +925,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   object-fit: contain;
   position: relative;
   z-index: 20;
+  cursor: default;
+  pointer-events: none;
 }
 .logo {
   cursor: default;
 }
 
-.logo-image {
-  display: block;
-  width: clamp(85px, 9vw, 125px);
-  height: auto;
-  object-fit: contain;
-  cursor: default;
-  pointer-events: none;
-}
-
-/* QUITAR SOLAMENTE LA ANIMACIÓN DEL LOGO */
 .logo:hover,
 .logo-image:hover {
   animation: none !important;
@@ -941,38 +939,24 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transform: none !important;
 }
 
-/* ELIMINAR MOVIMIENTO DE LA VENTANA DE PRODUCTOS EN CELULARES */
 @media (max-width: 720px) {
   .modal[open] {
     animation: none !important;
     transform: none !important;
   }
-}
-
-/* EVITAR QUE LA VENTANA DE PRODUCTOS SE DESPLACE O REBOTE */
-@media (max-width: 720px) {
   dialog.modal[open] {
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
-}
-
-/* CORRECCIÓN DE MOVIMIENTOS EN CELULARES */
-@media (max-width: 720px) {
-
-  /* Ventana de detalles del producto */
   html body dialog.modal[open] {
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
-
   html body dialog.modal[open]::backdrop {
     animation: none !important;
   }
-
-  /* Animaciones de entrada de las secciones */
   html.js .reveal,
   html.js .reveal.is-visible {
     opacity: 1 !important;
@@ -980,30 +964,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     animation: none !important;
     transition: none !important;
   }
-}
-
-/* ALTURA ESTABLE DE LOS DETALLES EN CELULARES */
-@media (max-width: 720px) {
-
   dialog.modal {
     max-height: calc(92svh - var(--safe-top)) !important;
     animation: none !important;
     transition: none !important;
   }
-
   dialog.modal .modal__inner {
     max-height: calc(92svh - var(--safe-top)) !important;
     animation: none !important;
     transition: none !important;
   }
-
 }
 
-/* ==========================================
-   CORRECCIÓN DEFINITIVA DE ANIMACIONES
-   ========================================== */
-
-/* 1. VENTANA DE DETALLES: SIN REBOTES */
 html body dialog.modal[open] {
   animation: none !important;
   transform: none !important;
@@ -1021,7 +993,6 @@ html body dialog.modal[open]::backdrop {
   transition: none !important;
 }
 
-/* 2. INICIO DE LA PÁGINA: SIN MOVIMIENTOS DE ENTRADA */
 .hero__eyebrow,
 .hero__title,
 .hero__subtitle,
@@ -1030,7 +1001,6 @@ html body dialog.modal[open]::backdrop {
   animation: none !important;
 }
 
-/* 3. SECCIONES: SIN DESPLAZAMIENTOS */
 html.js .reveal,
 html.js .reveal.is-visible {
   opacity: 1 !important;
@@ -1039,7 +1009,6 @@ html.js .reveal.is-visible {
   transition: none !important;
 }
 
-/* 4. Mantener el desplazamiento dentro de la ficha */
 html body dialog.modal .modal__inner {
   min-width: 0;
   overflow-x: hidden;

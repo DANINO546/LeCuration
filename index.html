@@ -18,8 +18,8 @@
 <body>
 
   
-<!-- ============ BARRA SUPERIOR ============ -->
-<header class="topbar">
+<!-- ============ BARRA SUPERIOR FIJA ============ -->
+<header class="topbar-fixed">
   <div class="leo-strip" aria-hidden="true"></div>
 
   <nav class="nav container" aria-label="Principal">
@@ -536,7 +536,7 @@
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
     modal.addEventListener("cancel", e => { e.preventDefault(); closeModal(); });
 
-    const topbar = document.querySelector(".topbar");
+    const topbar = document.querySelector(".topbar-fixed");
     // Subimos el umbral a 60px y agregamos un pequeño margen de histéresis
     const onScroll = () => {
       if (window.scrollY > 60) {
