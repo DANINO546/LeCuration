@@ -1124,9 +1124,47 @@ html body dialog.modal .modal__inner {
 }
 
 @media (max-width: 600px) {
+  /* Mantenemos tu logo exactamente como ya cargó */
+  .topbar-fixed .logo {
+    width: 5.2em !important;
+    font-size: 9.5px !important;
+    margin-left: -4px;
+  }
+  .topbar-fixed .logo-image {
+    width: 72px !important;
+  }
+
+  /* Acomodamos los 3 textos completos en una sola línea limpia y alineada */
+  .nav {
+    gap: .35rem;
+    padding-inline: .75rem;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .35rem;
+    margin-left: auto;
+    flex-wrap: nowrap;
+  }
+
+  .nav__links li {
+    display: flex;
+    align-items: center;
+  }
+
   .nav__links a {
-    font-size: .6rem;
-    letter-spacing: .08em;
-    padding: .4rem .45rem;
+    font-size: .53rem !important;
+    letter-spacing: .03em !important;
+    padding: .35rem .25rem !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+  }
+
+  .nav__links a:not(.nav__cta)::after {
+    left: .25rem;
+    right: .25rem;
+    bottom: .1rem;
   }
 }
