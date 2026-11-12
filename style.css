@@ -1124,47 +1124,53 @@ html body dialog.modal .modal__inner {
 }
 
 @media (max-width: 600px) {
-  /* Mantenemos tu logo exactamente como ya cargó */
+  /* Logo compacto a la izquierda */
   .topbar-fixed .logo {
-    width: 5.2em !important;
-    font-size: 9.5px !important;
+    width: 4.8em !important;
+    font-size: 9px !important;
     margin-left: -4px;
+    flex-shrink: 0;
   }
   .topbar-fixed .logo-image {
-    width: 72px !important;
+    width: 66px !important;
   }
 
-  /* Acomodamos los 3 textos completos en una sola línea limpia y alineada */
+  /* Barra de navegación: repartimos el espacio entre logo y enlaces */
   .nav {
-    gap: .35rem;
-    padding-inline: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .4rem;
+    padding-inline: .65rem;
   }
 
+  /* Contenedor de enlaces: ocupa el espacio disponible y centra los textos */
   .nav__links {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: .35rem;
-    margin-left: auto;
+    justify-content: space-evenly;
+    flex: 1;
+    gap: .25rem;
+    margin-left: 0;
     flex-wrap: nowrap;
   }
 
-  .nav__links li {
-    display: flex;
-    align-items: center;
-  }
-
+  /* Letras 2 puntos más grandes y legibles */
   .nav__links a {
-    font-size: .53rem !important;
-    letter-spacing: .03em !important;
-    padding: .35rem .25rem !important;
+    font-size: .63rem !important;
+    letter-spacing: .02em !important;
+    padding: .4rem .2rem !important;
     white-space: nowrap !important;
     line-height: 1 !important;
   }
-
-  .nav__links a:not(.nav__cta)::after {
-    left: .25rem;
-    right: .25rem;
-    bottom: .1rem;
+}
+@media (max-width: 720px) {
+  /* Centramos la ventana emergente de Preguntas Frecuentes en pantalla */
+  dialog.modal.modal-faq {
+    margin: auto !important;
+    width: calc(100% - 2rem) !important;
+    max-width: 500px !important;
+    border-radius: 16px !important;
+    max-height: 85dvh !important;
   }
 }
