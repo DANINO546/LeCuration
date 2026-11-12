@@ -1015,3 +1015,106 @@ html body dialog.modal .modal__inner {
   overflow-y: auto;
   overscroll-behavior: contain;
 }
+/* =========================================================
+   LeCuration MX — Ajustes de Navegación y Acordeón FAQ
+   ========================================================= */
+
+/* Logo más compacto en la barra superior */
+@media (min-width: 601px) {
+  .topbar-fixed .logo {
+    width: 5.5em !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Estilos de la ventana emergente de FAQ */
+.modal-faq {
+  width: min(650px, 100% - 2rem);
+}
+
+.faq-inner {
+  display: block !important;
+}
+
+.faq-content-area {
+  padding: 2.4rem 2.2rem 2rem !important;
+  gap: 1.2rem !important;
+}
+
+/* Acordeón desplegable limpio con animaciones fluidas */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+}
+
+.faq-item {
+  background: var(--blush);
+  border: 1px solid var(--petal);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  transition: border-color .3s var(--ease);
+}
+
+.faq-item[open] {
+  border-color: var(--rose-deep);
+  background: var(--cream);
+}
+
+.faq-question {
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--cocoa);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color .25s var(--ease);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: "+";
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--rose-deep);
+  transition: transform .3s var(--ease);
+}
+
+.faq-item[open] .faq-question::after {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  padding: 0 1.2rem 1.2rem 1.2rem;
+  font-size: .9rem;
+  color: var(--taupe);
+  font-weight: 300;
+  line-height: 1.5;
+  animation: fadeInFaq .3s var(--ease);
+}
+
+.faq-answer strong {
+  color: var(--cocoa);
+  font-weight: 600;
+}
+
+@keyframes fadeInFaq {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 600px) {
+  .nav__links a {
+    font-size: .6rem;
+    letter-spacing: .08em;
+    padding: .4rem .45rem;
+  }
+}

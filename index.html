@@ -24,7 +24,7 @@
 
   <nav class="nav container" aria-label="Principal">
 
-    <!-- LOGO SIN ENLACE NI CLIC -->
+    <!-- LOGO COMPACTO A LA IZQUIERDA -->
     <div class="logo logo--light">
       <img
         class="logo-image"
@@ -33,24 +33,11 @@
       />
     </div>
 
+    <!-- TRES ENLACES DE NAVEGACIÓN -->
     <ul class="nav__links">
       <li><a href="#catalogo">Catálogo</a></li>
       <li><a href="#como-comprar">Cómo comprar</a></li>
-
-      <li>
-        <a
-          class="nav__cta"
-          href="https://wa.me/525531045512?text=Hola%20%F0%9F%92%95%20quiero%20informaci%C3%B3n%20del%20cat%C3%A1logo"
-          target="_blank"
-          rel="noopener"
-          aria-label="Contacto por WhatsApp"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6 0l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/>
-          </svg>
-          <span>Contacto</span>
-        </a>
-      </li>
+      <li><a href="#" id="open-faq">Preguntas frecuentes</a></li>
     </ul>
 
   </nav>
@@ -156,12 +143,8 @@
     <div class="leo-strip leo-strip--thin" aria-hidden="true"></div>
     <div class="container footer__inner">
       <div class="logo">
-  <img
-    class="logo-image"
-    src="Lecurationmx.png"
-    alt="LeCuration MX"
-  />
-</div>
+        <img class="logo-image" src="Lecurationmx.png" alt="LeCuration MX" />
+      </div>
       <p class="footer__copy">© 2026 LeCuration MX · Catálogo de demostración</p>
     </div>
   </footer>
@@ -171,7 +154,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6 0l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
   </a>
 
-  <!-- ============ VENTANA DE DETALLES ============ -->
+  <!-- ============ VENTANA DE DETALLES DE PRENDA ============ -->
   <dialog class="modal" id="modal" aria-labelledby="m-name">
     <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
     <div class="modal__inner">
@@ -204,6 +187,55 @@
           Selecciona una talla
         </a>
         <p class="modal__note">Pago solo por transferencia (Mercado Pago) · Envíos nacionales. </p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ VENTANA EMERGENTE DE PREGUNTAS FRECUENTES (FAQ) ============ -->
+  <dialog class="modal modal-faq" id="faq-modal" aria-labelledby="faq-title">
+    <button class="modal__close" type="button" aria-label="Cerrar" id="close-faq">✕</button>
+    <div class="modal__inner faq-inner">
+      <div class="modal__info faq-content-area">
+        <h3 class="modal__name" id="faq-title">Preguntas Frecuentes</h3>
+        <p class="modal__desc">Todo lo que necesitas saber sobre tus pedidos y envíos en LeCuration MX.</p>
+
+        <div class="faq-accordion">
+          <!-- Pregunta 1 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Cómo se realiza el proceso de pedido?</summary>
+            <div class="faq-answer">
+              <p>Elige tu prenda y talla favorita en el catálogo, haz clic en el botón de <strong>Pedir por WhatsApp</strong> y se abrirá automáticamente el chat con nosotras para confirmar disponibilidad y apartar tu pieza.</p>
+            </div>
+          </details>
+
+          <!-- Pregunta 2 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Cuáles son los métodos de pago aceptados?</summary>
+            <div class="faq-answer">
+              <p>Aceptamos <strong>únicamente transferencias bancarias vía Mercado Pago</strong>. Una vez confirmado tu pedido por WhatsApp, te compartimos los datos de transferencia y nos envías tu comprobante.</p>
+            </div>
+          </details>
+
+          <!-- Pregunta 3 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Cómo funcionan los envíos y en cuánto tiempo llegan?</summary>
+            <div class="faq-answer">
+              <p>Hacemos envíos nacionales a todo México. Tu paquete se despacha de forma segura y llega a la puerta de tu casa en un tiempo estimado de <strong>2 a 4 días hábiles</strong>, proporcionándote tu número de guía para el rastreo.</p>
+            </div>
+          </details>
+
+          <!-- Pregunta 4 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Las medidas de las prendas son exactas?</summary>
+            <div class="faq-answer">
+              <p>Las medidas mostradas en la tabla de cada prenda son un <strong>referente aproximado tomado con la prenda en plano</strong>. Al ser piezas de curaduría seleccionadas minuciosamente, si tienes dudas específicas con tu talla, puedes escribirnos directamente por WhatsApp y te asesoramos con mucho gusto.</p>
+            </div>
+          </details>
+        </div>
+
+        <a class="btn btn--whatsapp" href="https://wa.me/525531045512?text=Hola%20%F0%9F%92%95%20tengo%20una%20duda%20sobre%20el%20pedido" target="_blank" rel="noopener">
+          ¿Tienes otra duda? Escríbenos
+        </a>
       </div>
     </div>
   </dialog>
@@ -445,9 +477,10 @@
     }
     cargarCatalogo(true);
     if (airtableListo && AIRTABLE.refrescarCada > 0) {
-      setInterval(() => { if (!document.hidden && !modal.open) cargarCatalogo(false); }, AIRTABLE.refrescarCada * 1000);
+      setInterval(() => { if (!document.hidden && !modal.open && !faqModal.open) cargarCatalogo(false); }, AIRTABLE.refrescarCada * 1000);
     }
 
+    // Modal de Producto
     const modal = $("modal");
     let current = null;
     let chosen = null;
@@ -536,8 +569,29 @@
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
     modal.addEventListener("cancel", e => { e.preventDefault(); closeModal(); });
 
+
+    // Modal de Preguntas Frecuentes (FAQ)
+    const faqModal = $("faq-modal");
+    $("open-faq").addEventListener("click", e => {
+      e.preventDefault();
+      faqModal.showModal();
+      document.body.classList.add("no-scroll");
+    });
+
+    function closeFaqModal() {
+      faqModal.classList.add("is-closing");
+      setTimeout(() => {
+        faqModal.classList.remove("is-closing");
+        faqModal.close();
+      }, 220);
+    }
+    faqModal.addEventListener("close", () => document.body.classList.remove("no-scroll"));
+    $("close-faq").addEventListener("click", closeFaqModal);
+    faqModal.addEventListener("click", e => { if (e.target === faqModal) closeFaqModal(); });
+    faqModal.addEventListener("cancel", e => { e.preventDefault(); closeFaqModal(); });
+
+
     const topbar = document.querySelector(".topbar-fixed");
-    // Subimos el umbral a 60px y agregamos un pequeño margen de histéresis
     const onScroll = () => {
       if (window.scrollY > 60) {
         topbar.classList.add("is-scrolled");
