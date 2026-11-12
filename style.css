@@ -1019,11 +1019,23 @@ html body dialog.modal .modal__inner {
    LeCuration MX — Ajustes de Navegación y Acordeón FAQ
    ========================================================= */
 
-/* Logo más compacto en la barra superior */
-@media (min-width: 601px) {
+/* Logo compacto y hacia la izquierda ÚNICAMENTE en teléfonos */
+@media (max-width: 600px) {
   .topbar-fixed .logo {
-    width: 5.5em !important;
-    font-size: 12px !important;
+    width: 5.2em !important;
+    font-size: 9.5px !important;
+    margin-left: -4px;
+  }
+  .topbar-fixed .logo-image {
+    width: 72px !important;
+  }
+  .nav__links {
+    gap: .15rem;
+  }
+  .nav__links a {
+    font-size: .58rem;
+    letter-spacing: .06em;
+    padding: .4rem .42rem;
   }
 }
 
