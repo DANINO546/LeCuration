@@ -72,14 +72,26 @@
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>envíos a todo méxico</span><i>♡</i>
-        <span>pago por transferencia</span><i>♡</i>
-        <span>atención personalizada</span><i>♡</i>
-        <span>piezas limitadas</span><i>♡</i>
-        <span>envíos a todo méxico</span><i>♡</i>
-        <span>pago por transferencia</span><i>♡</i>
-        <span>atención personalizada</span><i>♡</i>
-        <span>piezas limitadas</span><i>♡</i>
+        <div class="marquee__group">
+          <span>entregas en punto medio y metro</span><i>♡</i>
+          <span>80% anticipo por transferencia</span><i>♡</i>
+          <span>atención personalizada</span><i>♡</i>
+          <span>piezas limitadas</span><i>♡</i>
+          <span>entregas en punto medio y metro</span><i>♡</i>
+          <span>80% anticipo por transferencia</span><i>♡</i>
+          <span>atención personalizada</span><i>♡</i>
+          <span>piezas limitadas</span><i>♡</i>
+        </div>
+        <div class="marquee__group" aria-hidden="true">
+          <span>entregas en punto medio y metro</span><i>♡</i>
+          <span>80% anticipo por transferencia</span><i>♡</i>
+          <span>atención personalizada</span><i>♡</i>
+          <span>piezas limitadas</span><i>♡</i>
+          <span>entregas en punto medio y metro</span><i>♡</i>
+          <span>80% anticipo por transferencia</span><i>♡</i>
+          <span>atención personalizada</span><i>♡</i>
+          <span>piezas limitadas</span><i>♡</i>
+        </div>
       </div>
     </div>
   </section>
@@ -88,9 +100,8 @@
     <!-- ============ CATÁLOGO ============ -->
     <section id="catalogo" class="catalog container">
       <div class="section-head reveal">
-        <p class="section-kicker">shop the look</p>
         <h2 class="section-title">Catálogo</h2>
-        <p class="section-text">Toca cualquier prenda para ver medidas, elegir tu talla y pedirla por WhatsApp.</p>
+        <p class="section-text">Piezas nuevas, de segunda mano y hallazgos a precios especiales. Cada publicación indica su condición para que encuentres algo que te encante, al precio que buscas.</p>
       </div>
 
       <div class="grid" id="grid"></div>
@@ -112,7 +123,7 @@
               <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
             </div>
             <h3 class="step__title">Pedido por WhatsApp</h3>
-            <p class="step__text">Elige tu prenda y talla, toca <strong>“Pedir por WhatsApp”</strong> y te confirmamos disponibilidad en el chat.</p>
+            <p class="step__text">Elige tu producto y, cuando corresponda, su talla; toca <strong>“Pedir por WhatsApp”</strong> y te confirmamos disponibilidad en el chat.</p>
           </li>
 
           <li class="step step--leo">
@@ -120,9 +131,9 @@
             <div class="step__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg>
             </div>
-            <h3 class="step__title">Pago por transferencia</h3>
-            <p class="step__text">Aceptamos <strong>únicamente transferencias bancarias vía Mercado Pago</strong>. Te enviamos los datos y nos compartes tu comprobante.</p>
-            <span class="pill">único método de pago</span>
+            <h3 class="step__title">Anticipo y liquidación</h3>
+            <p class="step__text">Para apartar tu prenda solicitamos un <strong>80% de anticipo por transferencia bancaria</strong> (vía Mercado Pago). El <strong>20% restante</strong> se liquida al momento de la entrega.</p>
+            <span class="pill">80% anticipo · 20% entrega</span>
           </li>
 
           <li class="step">
@@ -130,8 +141,8 @@
             <div class="step__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>
             </div>
-            <h3 class="step__title">Envíos nacionales</h3>
-            <p class="step__text">Envíos nacionales a todo México. Tu pedido llega a tu puerta en <strong>2 a 4 días hábiles</strong>, con número de guía.</p>
+            <h3 class="step__title">Entregas personales</h3>
+            <p class="step__text">Realizamos entregas en <strong>puntos medios o líneas del metro</strong> acordados previamente. Te pedimos <strong>respetar el horario y punto acordado</strong> para brindarte el mejor servicio.</p>
           </li>
         </ol>
       </div>
@@ -159,9 +170,21 @@
     <button class="modal__close" type="button" aria-label="Cerrar" data-close>✕</button>
     <div class="modal__inner">
 
-      <div class="modal__media">
-        <img id="m-img" src="" alt="" />
-        <span class="card__tag" id="m-tag" hidden></span>
+      <div class="modal__media" id="m-gallery">
+        <div class="gallery-stage" id="m-gallery-stage">
+          <img id="m-img" src="" alt="" />
+          <div class="product-badges product-badges--modal" id="m-tags" aria-label="Etiquetas del producto"></div>
+
+          <button class="gallery-nav gallery-nav--prev" id="m-prev" type="button" aria-label="Ver fotografía anterior" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+          </button>
+          <button class="gallery-nav gallery-nav--next" id="m-next" type="button" aria-label="Ver fotografía siguiente" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+          </button>
+          <span class="gallery-counter" id="m-counter" aria-live="polite" hidden>1 / 1</span>
+        </div>
+
+        <div class="gallery-thumbs" id="m-thumbs" aria-label="Miniaturas de fotografías" hidden></div>
       </div>
 
       <div class="modal__info">
@@ -171,13 +194,13 @@
 
         <ul class="modal__details" id="m-details"></ul>
 
-        <div class="modal__block">
+        <div class="modal__block" id="m-size-block">
           <p class="modal__label">Elige tu talla <span id="m-size-hint">· toca una opción</span></p>
           <div class="size-picker" id="m-sizes" role="radiogroup" aria-label="Talla"></div>
         </div>
 
-        <div class="modal__block">
-          <p class="modal__label">Medidas <span>(cm, prenda en plano)</span></p>
+        <div class="modal__block" id="m-measures-block">
+          <p class="modal__label" id="m-measures-label">Medidas <span>(cm, prenda en plano)</span></p>
           <div class="table-wrap">
             <table class="measures" id="m-measures"></table>
           </div>
@@ -186,7 +209,7 @@
         <a class="btn btn--whatsapp is-disabled" id="m-cta" href="#" target="_blank" rel="noopener" aria-disabled="true">
           Selecciona una talla
         </a>
-        <p class="modal__note">Pago solo por transferencia (Mercado Pago) · Envíos nacionales. </p>
+        <p class="modal__note">80% de anticipo por transferencia y 20% restante en la entrega · Puntos medios o metro. </p>
       </div>
     </div>
   </dialog>
@@ -197,38 +220,54 @@
     <div class="modal__inner faq-inner">
       <div class="modal__info faq-content-area">
         <h3 class="modal__name" id="faq-title">Preguntas Frecuentes</h3>
-        <p class="modal__desc">Todo lo que necesitas saber sobre tus pedidos y envíos en LeCuration MX.</p>
+        <p class="modal__desc">Todo lo que necesitas saber sobre tus pedidos y entregas en LeCuration MX.</p>
 
         <div class="faq-accordion">
           <!-- Pregunta 1 -->
           <details class="faq-item">
             <summary class="faq-question">¿Cómo se realiza el proceso de pedido?</summary>
             <div class="faq-answer">
-              <p>Elige tu prenda y talla favorita en el catálogo, haz clic en el botón de <strong>Pedir por WhatsApp</strong> y se abrirá automáticamente el chat con nosotras para confirmar disponibilidad y apartar tu pieza.</p>
+              <p>Elige tu producto y, cuando corresponda, su talla en el catálogo. Después, toca el botón de <strong>Pedir por WhatsApp</strong> y se abrirá el chat con nosotras para confirmar que siga disponible y ayudarte con tu pedido.</p>
             </div>
           </details>
 
           <!-- Pregunta 2 -->
           <details class="faq-item">
-            <summary class="faq-question">¿Cuáles son los métodos de pago aceptados?</summary>
+            <summary class="faq-question">¿Cómo puedo pagar?</summary>
             <div class="faq-answer">
-              <p>Aceptamos <strong>únicamente transferencias bancarias vía Mercado Pago</strong>. Una vez confirmado tu pedido por WhatsApp, te compartimos los datos de transferencia y nos envías tu comprobante.</p>
+              <p>Para apartar un producto solicitamos un <strong>80% de anticipo por transferencia bancaria</strong> (vía Mercado Pago). El <strong>20% restante</strong> se paga al momento de la entrega, en efectivo o por transferencia inmediata.</p>
             </div>
           </details>
 
           <!-- Pregunta 3 -->
           <details class="faq-item">
-            <summary class="faq-question">¿Cómo funcionan los envíos y en cuánto tiempo llegan?</summary>
+            <summary class="faq-question">¿Cuánto tiempo tengo para realizar el apartado?</summary>
             <div class="faq-answer">
-              <p>Hacemos envíos nacionales a todo México. Tu paquete se despacha de forma segura y llega a la puerta de tu casa en un tiempo estimado de <strong>2 a 4 días hábiles</strong>, proporcionándote tu número de guía para el rastreo.</p>
+              <p>Cuando confirmemos que el producto está disponible y te compartamos los datos de pago, tendrás <strong>24 horas</strong> para realizar el anticipo del 80% y enviarnos tu comprobante. El apartado queda confirmado cuando recibimos el anticipo. Si no se realiza dentro de ese plazo, el producto volverá a estar disponible. </p>
             </div>
           </details>
 
           <!-- Pregunta 4 -->
           <details class="faq-item">
-            <summary class="faq-question">¿Las medidas de las prendas son exactas?</summary>
+            <summary class="faq-question">¿Cómo funcionan las entregas?</summary>
             <div class="faq-answer">
-              <p>Las medidas mostradas en la tabla de cada prenda son un <strong>referente aproximado tomado con la prenda en plano</strong>. Al ser piezas de curaduría seleccionadas minuciosamente, si tienes dudas específicas con tu talla, puedes escribirnos directamente por WhatsApp y te asesoramos con mucho gusto.</p>
+              <p>Por el momento no realizamos envíos nacionales. Todas nuestras entregas son personales en <strong>puntos medios o estaciones de líneas del metro</strong> acordados previamente por WhatsApp. Es importante respetar el día, horario y punto que acordemos para que recibas tu pedido sin contratiempos.</p>
+            </div>
+          </details>
+
+          <!-- Pregunta 5 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Las medidas de los productos son exactas?</summary>
+            <div class="faq-answer">
+              <p>Las medidas que aparecen en cada publicación son <strong>aproximadas</strong> y dependen del tipo de producto. En la ropa se mide la prenda extendida; en el calzado podemos indicar el largo de la plantilla; y en mochilas o bolsos mostramos medidas como alto, ancho y fondo. Si tienes dudas sobre alguna medida, escríbenos por WhatsApp antes de comprar.</p>
+            </div>
+          </details>
+
+          <!-- Pregunta 6 -->
+          <details class="faq-item">
+            <summary class="faq-question">¿Puedo cambiar o cancelar mi compra?</summary>
+            <div class="faq-answer">
+              <p>Si necesitas un cambio por talla o preferencia, escríbenos dentro de los primeros <strong>3 días naturales después de recibir el producto</strong>. Para estos cambios, el artículo debe estar sin uso y en las mismas condiciones en que te lo entregamos. Además, en las compras realizadas a distancia, la ley contempla un plazo de <strong>5 días hábiles para cancelar la compra</strong>. Este plazo se cuenta desde que recibes el producto o desde que confirmas el pedido, lo que ocurra después. Si recibes algo diferente a lo anunciado o con un defecto que no se había informado, contáctanos por WhatsApp y, de ser posible, mándanos fotos para revisar tu caso.</p>
             </div>
           </details>
         </div>
@@ -252,6 +291,8 @@
       nombre:      "Nombre",
       precio:      "Precio",
       etiqueta:    "Etiqueta",
+      precioAnterior: "Precio anterior",
+      tipoProducto: "Tipo de producto",
       foto:        "Foto",
       fotoUrl:     "Foto URL",
       alt:         "Texto alternativo",
@@ -370,41 +411,152 @@
       const price = Number(f[c.precio]);
       if (!name || !isFinite(price) || f[c.ocultar]) return null;
 
-      const foto = Array.isArray(f[c.foto]) ? f[c.foto][0] : null;
-      const img = foto ? ((foto.thumbnails && foto.thumbnails.full && foto.thumbnails.full.url) || foto.url)
-                       : String(f[c.fotoUrl] || "").trim();
-      const thumb = foto ? ((foto.thumbnails && foto.thumbnails.large && foto.thumbnails.large.url) || img) : img;
+      const previousPriceValue = Number(f[c.precioAnterior]);
+      const previousPrice = Number.isFinite(previousPriceValue) && previousPriceValue > price
+        ? previousPriceValue
+        : null;
 
-      const todas = lista(f[c.tallas]);
-      const agot  = lista(f[c.agotadas]).map(s => s.toUpperCase());
-      const sizes = sortSizes((todas.length ? todas : ["Unitalla"]).map(label => ({ label, stock: !agot.includes(label.toUpperCase()) })));
+      // Airtable puede devolver varias imágenes dentro del mismo campo de adjuntos.
+      // Conservamos todas para la galería y usamos la primera como portada del catálogo.
+      const attachments = Array.isArray(f[c.foto])
+        ? f[c.foto]
+        : (f[c.foto] ? [f[c.foto]] : []);
 
-      const measures = {};
-      lineas(f[c.medidas]).forEach(line => {
-        const i = line.indexOf(":");
-        if (i < 1) return;
-        const key = line.slice(0, i).trim();
-        const vals = line.slice(i + 1).split(",").map(s => s.trim()).filter(Boolean);
-        const match = sizes.find(s => s.label.toUpperCase() === key.toUpperCase());
-        measures[match ? match.label : key] = vals;
-      });
-      let cols = lista(f[c.columnas]);
-      if (!cols.length) {
-        const n = Math.max(0, ...Object.values(measures).map(v => v.length));
-        cols = Array.from({ length: n }, (_, k) => "Medida " + (k + 1));
+      const imageAlt = String(f[c.alt] || "").trim() || name;
+      const photos = attachments.map((attachment, index) => {
+        const thumbnails = attachment && attachment.thumbnails ? attachment.thumbnails : {};
+        // La fotografía principal usa el archivo original del adjunto.
+        const original = attachment && typeof attachment === "object" ? attachment.url : "";
+        const src = (typeof attachment === "string" ? attachment : "")
+          || original
+          || (thumbnails.full && thumbnails.full.url)
+          || (thumbnails.large && thumbnails.large.url)
+          || (thumbnails.small && thumbnails.small.url)
+          || "";
+        // Para las tarjetas usamos la miniatura grande, nunca la pequeña como primera opción.
+        const thumb = (thumbnails.large && thumbnails.large.url)
+          || (thumbnails.full && thumbnails.full.url)
+          || original
+          || (thumbnails.small && thumbnails.small.url)
+          || src;
+        return {
+          src,
+          thumb,
+          alt: attachments.length > 1 ? `${imageAlt} · fotografía ${index + 1}` : imageAlt
+        };
+      }).filter(photo => photo.src);
+
+      // Compatibilidad con el campo anterior "Foto URL" si no hay adjuntos.
+      const fotoUrl = String(f[c.fotoUrl] || "").trim();
+      if (!photos.length && fotoUrl) {
+        photos.push({ src: fotoUrl, thumb: fotoUrl, alt: imageAlt });
       }
 
+      const img = photos.length ? photos[0].src : PLACEHOLDER_IMG;
+      const thumb = photos.length ? photos[0].thumb : PLACEHOLDER_IMG;
+
+      const productType = String(f[c.tipoProducto] || "").trim();
+      const normalizedType = normalizeLabel(productType);
+      // Las categorías Ropa y Calzado necesitan selector de talla.
+      // Si el campo está vacío, mantenemos el comportamiento anterior para productos ya publicados.
+      const usesSizes = !productType || normalizedType === "ropa" || normalizedType === "calzado";
+      const allSizes = lista(f[c.tallas]);
+      const agot = lista(f[c.agotadas]).map(s => s.toUpperCase());
+      const sizes = usesSizes
+        ? sortSizes((allSizes.length ? allSizes : (productType ? [] : ["Unitalla"])).map(label => ({
+            label,
+            stock: !agot.includes(label.toUpperCase())
+          })))
+        : [];
+      const hasSizeOptions = usesSizes && sizes.length > 0;
+
+      let cols = lista(f[c.columnas]);
+      const measures = {};
+      const dimensions = [];
+      const rawMeasures = String(f[c.medidas] || "").trim();
+
+      if (usesSizes) {
+        // Ropa y calzado: una línea por talla. Ejemplo: S: 46, 64, 18
+        lineas(rawMeasures).forEach(line => {
+          const i = line.indexOf(":");
+          if (i < 1) return;
+          const key = line.slice(0, i).trim();
+          const vals = line.slice(i + 1).split(",").map(s => s.trim()).filter(Boolean);
+          const match = sizes.find(s => s.label.toUpperCase() === key.toUpperCase());
+          measures[match ? match.label : key] = vals;
+        });
+
+        if (!cols.length) {
+          const n = Math.max(0, ...Object.values(measures).map(v => v.length));
+          cols = Array.from({ length: n }, (_, k) => "Medida " + (k + 1));
+        }
+      } else {
+        // Mochilas, bolsas, accesorios y otros: dimensiones sin selector de talla.
+        // Formato recomendado: Producto: 37 cm, 16 cm, 10 cm
+        const measureLines = lineas(rawMeasures);
+        const generalLine = measureLines.find(line => /^(producto|general|unitalla|unica|única)\s*:/i.test(line));
+
+        if (generalLine && cols.length) {
+          const values = generalLine.slice(generalLine.indexOf(":") + 1)
+            .split(",").map(value => value.trim()).filter(Boolean);
+          dimensions.push(...cols.map((label, index) => ({ label, value: values[index] || "" }))
+            .filter(item => item.value));
+        }
+
+        // También aceptamos el formato descriptivo que ya estabas usando:
+        // Largo: 37 cm Ancho: 16 cm, o una dimensión por renglón.
+        if (!dimensions.length && cols.length && rawMeasures) {
+          const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const labels = cols.slice().sort((a, b) => b.length - a.length);
+          const labelPattern = labels.map(escapeRegExp).join("|");
+          const pairPattern = new RegExp(
+            `(?:^|[\\s,;])(${labelPattern})\\s*:\\s*(.*?)(?=(?:[\\s,;]+)(?:${labelPattern})\\s*:|$)`,
+            "gi"
+          );
+          const found = new Map();
+          for (const match of rawMeasures.matchAll(pairPattern)) {
+            const value = match[2].trim().replace(/[;,]+$/, "").trim();
+            if (value) found.set(normalizeLabel(match[1]), value);
+          }
+          dimensions.push(...cols.map(label => ({ label, value: found.get(normalizeLabel(label)) || "" }))
+            .filter(item => item.value));
+        }
+
+        // Respaldo para dimensiones escritas una por línea sin haber llenado las columnas.
+        if (!dimensions.length && rawMeasures) {
+          measureLines.forEach(line => {
+            const separator = line.indexOf(":");
+            if (separator > 0) {
+              const label = line.slice(0, separator).trim();
+              const value = line.slice(separator + 1).trim();
+              if (label && value) dimensions.push({ label, value });
+            }
+          });
+        }
+
+        // Si solo se capturaron valores separados por comas, los relacionamos con las columnas.
+        if (!dimensions.length && cols.length && rawMeasures && !rawMeasures.includes(":")) {
+          const values = rawMeasures.split(",").map(value => value.trim()).filter(Boolean);
+          dimensions.push(...cols.map((label, index) => ({ label, value: values[index] || "" }))
+            .filter(item => item.value));
+        }
+      }
       return {
         id: r.id,
         name, price,
         tag: String(f[c.etiqueta] || "").trim(),
+        previousPrice,
         img: img || PLACEHOLDER_IMG,
         thumb: thumb || PLACEHOLDER_IMG,
-        imgKey: foto ? foto.id : img,
-        alt: String(f[c.alt] || "").trim() || name,
+        photos: photos.length ? photos : [{ src: PLACEHOLDER_IMG, thumb: PLACEHOLDER_IMG, alt: imageAlt }],
+        imgKey: attachments.length && attachments[0] && typeof attachments[0] === "object" ? attachments[0].id : img,
+        alt: imageAlt,
         desc: String(f[c.descripcion] || "").trim(),
         details: lineas(f[c.detalles]),
-        sizes, cols, measures
+        productType,
+        usesSizes,
+        hasSizeOptions,
+        sizes, cols, measures, dimensions
       };
     }
 
@@ -425,6 +577,79 @@
       grid.innerHTML = `<p class="grid__msg${loading ? " is-loading" : ""}">${esc(text)}</p>`;
     }
 
+    function normalizeLabel(value) {
+      return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
+    function productHasSizeOptions(product) {
+      // Los productos de demostración y publicaciones anteriores conservan su lógica de tallas.
+      return typeof product.hasSizeOptions === "boolean" ? product.hasSizeOptions : true;
+    }
+
+    function getProductBadges(product) {
+      const tag = String(product.tag || "").trim();
+      const normalizedTag = normalizeLabel(tag);
+      const hasOfferPrice = Number(product.previousPrice) > Number(product.price);
+
+      // Etiqueta es la única fuente de etiquetas visibles para cada producto.
+      // El precio anterior puede mostrar el descuento sin crear una segunda etiqueta.
+      if (tag) {
+        if (/segunda mano|usad[oa]|pre.?loved/.test(normalizedTag)) {
+          return [{ label: "SEGUNDA MANO", kind: "secondhand" }];
+        }
+        if (/^(nuevo|nueva|new)$/.test(normalizedTag)) {
+          return [{ label: "NUEVO", kind: "new" }];
+        }
+        if (/oferta|rebaja|descuento|liquidacion|sale/.test(normalizedTag)) {
+          return [{ label: tag, kind: "offer" }];
+        }
+        return [{ label: tag, kind: "custom" }];
+      }
+
+      // Solo se genera una etiqueta automática si no hay nada escrito en Etiqueta.
+      return hasOfferPrice ? [{ label: "EN OFERTA", kind: "offer" }] : [];
+    }
+
+    function badgeItemsHTML(product) {
+      return getProductBadges(product).map(badge =>
+        `<span class="card__tag card__tag--${badge.kind}">${esc(badge.label)}</span>`
+      ).join("");
+    }
+
+    function badgesHTML(product, modifier = "") {
+      const items = badgeItemsHTML(product);
+      return items ? `<div class="product-badges ${modifier}">${items}</div>` : "";
+    }
+
+    function priceHTML(product) {
+      const hasOfferPrice = Number(product.previousPrice) > Number(product.price);
+      return `${hasOfferPrice ? `<del>${money(product.previousPrice)}</del>` : ""}<strong>${money(product.price)}</strong>`;
+    }
+
+    // Precarga las imágenes del producto al abrirlo para que los siguientes
+    // cambios de fotografía aprovechen la caché del navegador.
+    const photoPreloadCache = new Map();
+    function preloadProductPhotos(photos, activeIndex = 0) {
+      photos.forEach((photo, index) => {
+        const src = photo && photo.src;
+        if (!src || src === PLACEHOLDER_IMG) return;
+        const isAdjacent = photos.length > 1 && (
+          index === (activeIndex + 1) % photos.length ||
+          index === (activeIndex - 1 + photos.length) % photos.length
+        );
+        const cached = photoPreloadCache.get(src);
+        if (cached) {
+          if (isAdjacent && !cached.complete && "fetchPriority" in cached) cached.fetchPriority = "high";
+          return;
+        }
+        const preload = new Image();
+        preload.decoding = "async";
+        if ("fetchPriority" in preload) preload.fetchPriority = isAdjacent ? "high" : "low";
+        preload.src = src;
+        photoPreloadCache.set(src, preload);
+      });
+    }
+
     function renderGrid() {
       grid.innerHTML = "";
       if (!PRODUCTS.length) { gridMessage("Pronto agregaremos nuevas piezas ✿"); return; }
@@ -439,18 +664,15 @@
         card.innerHTML = `
           <div class="card__media">
             <img src="${esc(thumb)}" alt="${esc(p.alt)}" loading="lazy" />
-            ${p.tag ? `<span class="card__tag">${esc(p.tag)}</span>` : ""}
-            <span class="card__peek">Ver detalles ✦</span>
+            ${badgesHTML(p, "product-badges--card")}
           </div>
           <div class="card__body">
             <div class="card__row">
               <h3 class="card__name">${esc(p.name)}</h3>
-              <p class="card__price">${money(p.price)}</p>
+              <p class="card__price">${priceHTML(p)}</p>
             </div>
-            <ul class="sizes-mini" aria-label="Tallas disponibles">
-              ${p.sizes.map(s => `<li class="${s.stock ? "" : "is-out"}">${esc(s.label)}</li>`).join("")}
-            </ul>
-            <span class="btn btn--soft">Ver detalles y tallas</span>
+            ${productHasSizeOptions(p) ? `<ul class="sizes-mini" aria-label="Tallas disponibles">${(p.sizes || []).map(s => `<li class="${s.stock ? "" : "is-out"}">${esc(s.label)}</li>`).join("")}</ul>` : ""}
+            <span class="btn btn--soft">${productHasSizeOptions(p) ? "Ver detalles y tallas" : "Ver detalles"}</span>
           </div>`;
         card.addEventListener("click", () => openModal(i));
         card.addEventListener("keydown", e => {
@@ -484,37 +706,99 @@
     const modal = $("modal");
     let current = null;
     let chosen = null;
+    let currentPhotos = [];
+    let activePhotoIndex = 0;
+
+    function renderPhotoThumbs() {
+      const thumbs = $("m-thumbs");
+      const multiple = currentPhotos.length > 1;
+      thumbs.hidden = !multiple;
+      thumbs.innerHTML = multiple ? currentPhotos.map((item, i) => `
+        <button class="gallery-thumb" type="button" data-photo-index="${i}"
+          aria-label="Ver fotografía ${i + 1} de ${currentPhotos.length}"
+          aria-pressed="${i === 0 ? "true" : "false"}">
+          <img src="${esc(item.thumb || item.src)}" alt="" loading="lazy" />
+        </button>`).join("") : "";
+    }
+
+    function showPhoto(index) {
+      if (!currentPhotos.length) return;
+
+      activePhotoIndex = (index + currentPhotos.length) % currentPhotos.length;
+      const photo = currentPhotos[activePhotoIndex];
+      const image = $("m-img");
+      image.loading = "eager";
+      image.decoding = "async";
+      if ("fetchPriority" in image) image.fetchPriority = "high";
+      image.src = photo.src;
+      image.alt = photo.alt || current.alt || current.name;
+
+      const multiple = currentPhotos.length > 1;
+      $("m-prev").hidden = !multiple;
+      $("m-next").hidden = !multiple;
+      $("m-counter").hidden = !multiple;
+      $("m-counter").textContent = `${activePhotoIndex + 1} / ${currentPhotos.length}`;
+      $("m-thumbs").querySelectorAll(".gallery-thumb").forEach((thumb, i) => {
+        thumb.setAttribute("aria-pressed", i === activePhotoIndex ? "true" : "false");
+      });
+      preloadProductPhotos(currentPhotos, activePhotoIndex);
+    }
 
     function openModal(i) {
       current = PRODUCTS[i];
       chosen = null;
+      activePhotoIndex = 0;
+      currentPhotos = Array.isArray(current.photos) && current.photos.length
+        ? current.photos.filter(photo => photo && photo.src)
+        : [{ src: current.img, thumb: current.thumb || current.img, alt: current.alt || current.name }];
 
-      $("m-img").src = current.img;
-      $("m-img").alt = current.alt;
+      if (!currentPhotos.length) {
+        currentPhotos = [{ src: current.img || PLACEHOLDER_IMG, thumb: current.thumb || current.img || PLACEHOLDER_IMG, alt: current.alt || current.name }];
+      }
+      renderPhotoThumbs();
+      showPhoto(0);
       $("m-name").textContent = current.name;
-      $("m-price").textContent = money(current.price);
+      $("m-price").innerHTML = priceHTML(current);
       $("m-desc").textContent = current.desc;
       $("m-details").innerHTML = current.details.map(d => `<li>${esc(d)}</li>`).join("");
+      $("m-tags").innerHTML = badgeItemsHTML(current);
 
-      const tag = $("m-tag");
-      tag.hidden = !current.tag;
-      tag.textContent = current.tag;
-
-      $("m-sizes").innerHTML = current.sizes.map(s => `
+      const hasSizes = productHasSizeOptions(current);
+      const sizeBlock = $("m-size-block");
+      sizeBlock.style.display = hasSizes ? "" : "none";
+      $("m-sizes").innerHTML = hasSizes ? (current.sizes || []).map(s => `
         <button type="button" role="radio" aria-checked="false" class="size" data-size="${esc(s.label)}" ${s.stock ? "" : "disabled title='Agotada'"}>
           ${esc(s.label)}${s.stock ? "" : "<small>agotada</small>"}
-        </button>`).join("");
+        </button>`).join("") : "";
 
-      $("m-measures").innerHTML = `
-        <thead><tr><th>Talla</th>${current.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead>
-        <tbody>${Object.entries(current.measures).map(([size, vals]) =>
-          `<tr data-row="${esc(size)}"><td>${esc(size)}</td>${vals.map(v => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}
-        </tbody>`;
-      $("m-measures").closest(".modal__block").style.display = Object.keys(current.measures).length ? "" : "none";
+      const measureBlock = $("m-measures-block");
+      const measureLabel = $("m-measures-label");
+      const measureTable = $("m-measures");
+      if (!hasSizes) {
+        measureLabel.textContent = "Dimensiones del producto";
+        measureTable.innerHTML = current.dimensions && current.dimensions.length
+          ? `<thead><tr><th>Dimensión</th><th>Medida</th></tr></thead><tbody>${current.dimensions.map(item =>
+              `<tr><td>${esc(item.label)}</td><td>${esc(item.value)}</td></tr>`).join("")}</tbody>`
+          : "";
+        measureBlock.style.display = current.dimensions && current.dimensions.length ? "" : "none";
+      } else {
+        const isFootwear = normalizeLabel(current.productType) === "calzado";
+        measureLabel.innerHTML = isFootwear
+          ? 'Medidas por talla <span>(cm)</span>'
+          : 'Medidas <span>(cm, prenda en plano)</span>';
+        measureTable.innerHTML = ` <thead><tr><th>Talla</th>${(current.cols || []).map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead>
+          <tbody>${Object.entries(current.measures || {}).map(([size, vals]) =>
+            `<tr data-row="${esc(size)}"><td>${esc(size)}</td>${vals.map(v => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}
+          </tbody>`;
+        measureBlock.style.display = Object.keys(current.measures || {}).length ? "" : "none";
+      }
 
-      const available = current.sizes.filter(s => s.stock);
-      if (current.sizes.length === 1 && available.length === 1) selectSize(available[0].label);
-      else updateCta();
+      const available = (current.sizes || []).filter(s => s.stock);
+      if (hasSizes && current.sizes.length === 1 && available.length === 1) {
+        selectSize(available[0].label);
+      } else {
+        updateCta();
+      }
 
       modal.showModal();
       document.body.classList.add("no-scroll");
@@ -524,7 +808,7 @@
       chosen = size;
       document.querySelectorAll("#m-sizes .size").forEach(b =>
         b.setAttribute("aria-checked", b.dataset.size === size ? "true" : "false"));
-      document.querySelectorAll("#m-measures tbody tr").forEach(r =>
+      document.querySelectorAll("#m-measures tbody tr[data-row]").forEach(r =>
         r.classList.toggle("is-active", r.dataset.row === size));
       updateCta();
     }
@@ -532,14 +816,48 @@
     function updateCta() {
       const cta = $("m-cta");
       const hint = $("m-size-hint");
+      const labelParent = hint.parentElement;
+
+      if (!productHasSizeOptions(current)) {
+        const msg = `Hola 💕 me interesa *${current.name}* (${money(current.price)}). ¿Está disponible?`;
+        cta.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+        cta.classList.remove("is-disabled");
+        cta.removeAttribute("aria-disabled");
+        cta.textContent = "Pedir por WhatsApp";
+        return;
+      }
+
       if (!chosen) {
         cta.classList.add("is-disabled");
         cta.setAttribute("aria-disabled", "true");
         cta.textContent = "Selecciona una talla";
         cta.href = "#";
         hint.textContent = "· toca una opción";
+        if (labelParent) labelParent.firstChild.textContent = "Elige tu talla ";
         return;
       }
+
+      // Si el producto tiene una sola talla (como Unitalla o Talla 23)
+      if (current.sizes.length === 1) {
+        const single = current.sizes[0].label;
+        const isUnitalla = single.toUpperCase() === "UNITALLA";
+        
+        if (labelParent) labelParent.firstChild.textContent = isUnitalla ? "Talla " : "Talla única ";
+        hint.textContent = isUnitalla ? "· única" : `· ${single}`;
+
+        const msg = isUnitalla
+          ? `Hola 💕 me interesa *${current.name}* (${money(current.price)}). ¿Está disponible?`
+          : `Hola 💕 me interesa *${current.name}* en talla *${single}* (${money(current.price)}). ¿Está disponible?`;
+        
+        cta.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+        cta.classList.remove("is-disabled");
+        cta.removeAttribute("aria-disabled");
+        cta.textContent = isUnitalla ? `Pedir por WhatsApp` : `Pedir talla ${single} por WhatsApp`;
+        return;
+      }
+
+      // Para productos con múltiples tallas donde el usuario elige manualmente
+      if (labelParent) labelParent.firstChild.textContent = "Elige tu talla ";
       const msg = `Hola 💕 me interesa *${current.name}* en talla *${chosen}* (${money(current.price)}). ¿Está disponible?`;
       cta.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
       cta.classList.remove("is-disabled");
@@ -547,6 +865,31 @@
       cta.textContent = `Pedir talla ${chosen} por WhatsApp`;
       hint.textContent = `· elegiste ${chosen}`;
     }
+
+    $("m-prev").addEventListener("click", () => showPhoto(activePhotoIndex - 1));
+    $("m-next").addEventListener("click", () => showPhoto(activePhotoIndex + 1));
+    $("m-thumbs").addEventListener("click", e => {
+      const thumb = e.target.closest("[data-photo-index]");
+      if (thumb) showPhoto(Number(thumb.dataset.photoIndex));
+    });
+
+    // También permitimos cambiar de foto con las flechas del teclado y con swipe en móvil.
+    modal.addEventListener("keydown", e => {
+      if (!modal.open || currentPhotos.length < 2) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); showPhoto(activePhotoIndex - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); showPhoto(activePhotoIndex + 1); }
+    });
+
+    let galleryTouchStartX = 0;
+    $("m-gallery-stage").addEventListener("touchstart", e => {
+      galleryTouchStartX = e.changedTouches[0]?.clientX || 0;
+    }, { passive: true });
+    $("m-gallery-stage").addEventListener("touchend", e => {
+      if (currentPhotos.length < 2 || !galleryTouchStartX) return;
+      const deltaX = e.changedTouches[0].clientX - galleryTouchStartX;
+      if (Math.abs(deltaX) > 45) showPhoto(activePhotoIndex + (deltaX < 0 ? 1 : -1));
+      galleryTouchStartX = 0;
+    }, { passive: true });
 
     $("m-sizes").addEventListener("click", e => {
       const btn = e.target.closest(".size");
