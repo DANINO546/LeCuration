@@ -8,6 +8,7 @@
   <meta name="description" content="Catálogo boutique de LeCuration MX. Prendas chic en tonos café y crema. Pedidos directos y personalizados por WhatsApp." />
 
   <!-- Tipografías -->
+  <link rel="preconnect" href="https://catalogo-lecuration.danielasando068.workers.dev" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Parisienne&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&display=swap" rel="stylesheet" />
@@ -423,21 +424,23 @@
         : (f[c.foto] ? [f[c.foto]] : []);
 
       const imageAlt = String(f[c.alt] || "").trim() || name;
+      const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
       const photos = attachments.map((attachment, index) => {
         const thumbnails = attachment && attachment.thumbnails ? attachment.thumbnails : {};
-        // La fotografía principal usa el archivo original del adjunto.
         const original = attachment && typeof attachment === "object" ? attachment.url : "";
+        // En móvil priorizamos thumbnails.large (hasta ~1000px, optimizado por Airtable) sobre el archivo crudo de cámara (varios MB)
         const src = (typeof attachment === "string" ? attachment : "")
-          || original
+          || (isMobileViewport && thumbnails.large && thumbnails.large.url)
           || (thumbnails.full && thumbnails.full.url)
           || (thumbnails.large && thumbnails.large.url)
-          || (thumbnails.small && thumbnails.small.url)
-          || "";
-        // Para las tarjetas usamos la miniatura grande, nunca la pequeña como primera opción.
-        const thumb = (thumbnails.large && thumbnails.large.url)
-          || (thumbnails.full && thumbnails.full.url)
           || original
           || (thumbnails.small && thumbnails.small.url)
+          || "";
+        // Para las tarjetas del grid usamos la miniatura optimizada
+        const thumb = (thumbnails.large && thumbnails.large.url)
+          || (thumbnails.full && thumbnails.full.url)
+          || (thumbnails.small && thumbnails.small.url)
+          || original
           || src;
         return {
           src,
@@ -660,10 +663,14 @@
         card.setAttribute("role", "button");
         card.setAttribute("aria-label", `Ver detalles de ${p.name}`);
         card.style.animationDelay = (Math.min(i, 12) * 0.07) + "s";
-        const thumb = p.thumb || p.img.replace("w=900&h=900", "w=600&h=600");
+        const thumb = p.thumb || p.img.replace("w=900&h=900", "w=500&h=500&q=75");
+        const isAboveFold = i < 4;
+        const imgLoadingAttrs = isAboveFold
+          ? 'loading="eager" fetchpriority="high" decoding="async"'
+          : 'loading="lazy" fetchpriority="low" decoding="async"';
         card.innerHTML = `
           <div class="card__media">
-            <img src="${esc(thumb)}" alt="${esc(p.alt)}" loading="lazy" />
+            <img src="${esc(thumb)}" alt="${esc(p.alt)}" ${imgLoadingAttrs} onload="this.classList.add('is-loaded')" />
             ${badgesHTML(p, "product-badges--card")}
           </div>
           <div class="card__body">
@@ -717,7 +724,7 @@
         <button class="gallery-thumb" type="button" data-photo-index="${i}"
           aria-label="Ver fotografía ${i + 1} de ${currentPhotos.length}"
           aria-pressed="${i === 0 ? "true" : "false"}">
-          <img src="${esc(item.thumb || item.src)}" alt="" loading="lazy" />
+          <img src="${esc(item.thumb || item.src)}" alt="" loading="lazy" decoding="async" />
         </button>`).join("") : "";
     }
 
