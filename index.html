@@ -417,8 +417,6 @@
         ? previousPriceValue
         : null;
 
-      // Airtable puede devolver varias imágenes dentro del mismo campo de adjuntos.
-      // Conservamos todas para la galería y usamos la primera como portada del catálogo.
       const attachments = Array.isArray(f[c.foto])
         ? f[c.foto]
         : (f[c.foto] ? [f[c.foto]] : []);
@@ -428,7 +426,6 @@
       const photos = attachments.map((attachment, index) => {
         const thumbnails = attachment && attachment.thumbnails ? attachment.thumbnails : {};
         const original = attachment && typeof attachment === "object" ? attachment.url : "";
-        // En móvil priorizamos thumbnails.large (hasta ~1000px, optimizado por Airtable) sobre el archivo crudo de cámara (varios MB)
         const src = (typeof attachment === "string" ? attachment : "")
           || (isMobileViewport && thumbnails.large && thumbnails.large.url)
           || (thumbnails.full && thumbnails.full.url)
@@ -436,7 +433,6 @@
           || original
           || (thumbnails.small && thumbnails.small.url)
           || "";
-        // Para las tarjetas del grid usamos la miniatura optimizada
         const thumb = (thumbnails.large && thumbnails.large.url)
           || (thumbnails.full && thumbnails.full.url)
           || (thumbnails.small && thumbnails.small.url)
@@ -449,7 +445,6 @@
         };
       }).filter(photo => photo.src);
 
-      // Compatibilidad con el campo anterior "Foto URL" si no hay adjuntos.
       const fotoUrl = String(f[c.fotoUrl] || "").trim();
       if (!photos.length && fotoUrl) {
         photos.push({ src: fotoUrl, thumb: fotoUrl, alt: imageAlt });
@@ -460,8 +455,6 @@
 
       const productType = String(f[c.tipoProducto] || "").trim();
       const normalizedType = normalizeLabel(productType);
-      // Las categorías Ropa y Calzado necesitan selector de talla.
-      // Si el campo está vacío, mantenemos el comportamiento anterior para productos ya publicados.
       const usesSizes = !productType || normalizedType === "ropa" || normalizedType === "calzado";
       const allSizes = lista(f[c.tallas]);
       const agot = lista(f[c.agotadas]).map(s => s.toUpperCase());
@@ -479,23 +472,51 @@
       const rawMeasures = String(f[c.medidas] || "").trim();
 
       if (usesSizes) {
-        // Ropa y calzado: una línea por talla. Ejemplo: S: 46, 64, 18
-        lineas(rawMeasures).forEach(line => {
-          const i = line.indexOf(":");
-          if (i < 1) return;
-          const key = line.slice(0, i).trim();
-          const vals = line.slice(i + 1).split(",").map(s => s.trim()).filter(Boolean);
-          const match = sizes.find(s => s.label.toUpperCase() === key.toUpperCase());
-          measures[match ? match.label : key] = vals;
-        });
+        const defaultSizeLabel = sizes.length === 1 ? sizes[0].label : "Única";
+        const colNamesNorm = cols.map(col => normalizeLabel(col));
+
+        // Detecta si escribiste el formato descriptivo: "Pecho: 52 cm Cintura: 44 cm..."
+        const firstColon = rawMeasures.indexOf(":");
+        const firstKeyNorm = firstColon > 0 ? normalizeLabel(rawMeasures.slice(0, firstColon)) : "";
+
+        if (cols.length && colNamesNorm.includes(firstKeyNorm)) {
+          const escapeRegExp = val => val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const sortedCols = cols.slice().sort((a, b) => b.length - a.length);
+          const colPattern = sortedCols.map(escapeRegExp).join("|");
+          const pairRegex = new RegExp(
+            `(?:^|[\\s,;])(${colPattern})\\s*:\\s*(.*?)(?=(?:[\\s,;]+)(?:${colPattern})\\s*:|$)`,
+            "gi"
+          );
+
+          const extracted = new Map();
+          for (const match of rawMeasures.matchAll(pairRegex)) {
+            const cleanVal = match[2].replace(/\bcm\b/gi, "").replace(/[;,]+$/, "").trim();
+            if (cleanVal) extracted.set(normalizeLabel(match[1]), cleanVal);
+          }
+
+          if (extracted.size > 0) {
+            measures[defaultSizeLabel] = cols.map(col => extracted.get(normalizeLabel(col)) || "—");
+          }
+        } else {
+          // Formato estándar por talla: "S/M: 52, 44, 54, 69"
+          lineas(rawMeasures).forEach(line => {
+            const i = line.indexOf(":");
+            if (i < 1) return;
+            const key = line.slice(0, i).trim();
+            const vals = line.slice(i + 1)
+              .split(",")
+              .map(s => s.replace(/\bcm\b/gi, "").trim())
+              .filter(Boolean);
+            const match = sizes.find(s => s.label.toUpperCase() === key.toUpperCase());
+            measures[match ? match.label : key] = vals;
+          });
+        }
 
         if (!cols.length) {
           const n = Math.max(0, ...Object.values(measures).map(v => v.length));
           cols = Array.from({ length: n }, (_, k) => "Medida " + (k + 1));
         }
       } else {
-        // Mochilas, bolsas, accesorios y otros: dimensiones sin selector de talla.
-        // Formato recomendado: Producto: 37 cm, 16 cm, 10 cm
         const measureLines = lineas(rawMeasures);
         const generalLine = measureLines.find(line => /^(producto|general|unitalla|unica|única)\s*:/i.test(line));
 
@@ -506,8 +527,6 @@
             .filter(item => item.value));
         }
 
-        // También aceptamos el formato descriptivo que ya estabas usando:
-        // Largo: 37 cm Ancho: 16 cm, o una dimensión por renglón.
         if (!dimensions.length && cols.length && rawMeasures) {
           const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
           const labels = cols.slice().sort((a, b) => b.length - a.length);
@@ -525,7 +544,6 @@
             .filter(item => item.value));
         }
 
-        // Respaldo para dimensiones escritas una por línea sin haber llenado las columnas.
         if (!dimensions.length && rawMeasures) {
           measureLines.forEach(line => {
             const separator = line.indexOf(":");
@@ -537,7 +555,6 @@
           });
         }
 
-        // Si solo se capturaron valores separados por comas, los relacionamos con las columnas.
         if (!dimensions.length && cols.length && rawMeasures && !rawMeasures.includes(":")) {
           const values = rawMeasures.split(",").map(value => value.trim()).filter(Boolean);
           dimensions.push(...cols.map((label, index) => ({ label, value: values[index] || "" }))
@@ -585,7 +602,6 @@
     }
 
     function productHasSizeOptions(product) {
-      // Los productos de demostración y publicaciones anteriores conservan su lógica de tallas.
       return typeof product.hasSizeOptions === "boolean" ? product.hasSizeOptions : true;
     }
 
@@ -594,8 +610,6 @@
       const normalizedTag = normalizeLabel(tag);
       const hasOfferPrice = Number(product.previousPrice) > Number(product.price);
 
-      // Etiqueta es la única fuente de etiquetas visibles para cada producto.
-      // El precio anterior puede mostrar el descuento sin crear una segunda etiqueta.
       if (tag) {
         if (/segunda mano|usad[oa]|pre.?loved/.test(normalizedTag)) {
           return [{ label: "SEGUNDA MANO", kind: "secondhand" }];
@@ -609,7 +623,6 @@
         return [{ label: tag, kind: "custom" }];
       }
 
-      // Solo se genera una etiqueta automática si no hay nada escrito en Etiqueta.
       return hasOfferPrice ? [{ label: "EN OFERTA", kind: "offer" }] : [];
     }
 
@@ -629,8 +642,6 @@
       return `${hasOfferPrice ? `<del>${money(product.previousPrice)}</del>` : ""}<strong>${money(product.price)}</strong>`;
     }
 
-    // Precarga las imágenes del producto al abrirlo para que los siguientes
-    // cambios de fotografía aprovechen la caché del navegador.
     const photoPreloadCache = new Map();
     function preloadProductPhotos(photos, activeIndex = 0) {
       photos.forEach((photo, index) => {
@@ -844,7 +855,6 @@
         return;
       }
 
-      // Si el producto tiene una sola talla (como Unitalla o Talla 23)
       if (current.sizes.length === 1) {
         const single = current.sizes[0].label;
         const isUnitalla = single.toUpperCase() === "UNITALLA";
@@ -863,7 +873,6 @@
         return;
       }
 
-      // Para productos con múltiples tallas donde el usuario elige manualmente
       if (labelParent) labelParent.firstChild.textContent = "Elige tu talla ";
       const msg = `Hola 💕 me interesa *${current.name}* en talla *${chosen}* (${money(current.price)}). ¿Está disponible?`;
       cta.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -880,7 +889,6 @@
       if (thumb) showPhoto(Number(thumb.dataset.photoIndex));
     });
 
-    // También permitimos cambiar de foto con las flechas del teclado y con swipe en móvil.
     modal.addEventListener("keydown", e => {
       if (!modal.open || currentPhotos.length < 2) return;
       if (e.key === "ArrowLeft") { e.preventDefault(); showPhoto(activePhotoIndex - 1); }
@@ -919,8 +927,6 @@
     modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
     modal.addEventListener("cancel", e => { e.preventDefault(); closeModal(); });
 
-
-    // Modal de Preguntas Frecuentes (FAQ)
     const faqModal = $("faq-modal");
     $("open-faq").addEventListener("click", e => {
       e.preventDefault();
@@ -939,7 +945,6 @@
     $("close-faq").addEventListener("click", closeFaqModal);
     faqModal.addEventListener("click", e => { if (e.target === faqModal) closeFaqModal(); });
     faqModal.addEventListener("cancel", e => { e.preventDefault(); closeFaqModal(); });
-
 
     const topbar = document.querySelector(".topbar-fixed");
     const onScroll = () => {
